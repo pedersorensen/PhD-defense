@@ -1,0 +1,307 @@
+<!doctype html>
+<meta charset=utf-8>
+
+<html lang="en">
+  <head>
+    <title>My PhD-defense presentation</title>
+    <!--Load the style sheet-->
+    <link href="style.css" rel="stylesheet"/>
+
+    <!--Alot of javascript libraries are needed to make this work-->
+
+    <!--utils.js is a little compilation of usefull function I creates-->
+    <script type="text/javascript" src="js/utils.js"></script>
+
+    <!--the jquery library is used by several other libraries-->
+    <script type="text/javascript" src="js/jquery.js"></script>
+
+    <!--raphael.js is used to make figures, easier than direct SVG-->
+    <script type="text/javascript" src="js/raphael.js"></script>
+
+    <!--flot.js is used to plot data-->
+    <script type="text/javascript" src="js/flot/jquery.flot.js"></script>
+
+    <!--MathJax allow using tex/latex typesetting of equations-->
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!--Or use a local copy-->
+    <!--<script type="text/javascript" src="js/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+
+    <!--The impress.js library, which constitutes the overall frameworj of
+    the presentation, goes in the end of the html document, loading it in
+    the header does not work-->
+  </head>
+  <body>
+    <!--Everything in the presentation must be inside a <div> with the-->
+    <!--id="impress", this is a part of the impress.js setup-->
+    <div id="impress" class="impress-not-supported">
+      <!--First a fall-back message if the browser does not fully-->
+      <!--support the impress.js implementation-->
+      <div class="fallback-message">
+        <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+        <p>For the best experience please use the latest <b>Chrome</b> or <b>Safari</b> browser. Firefox 10 (to be released soon) will also handle it.</p>
+      </div>
+      <!--------------------------------------------------
+      Title slide
+      -------------------------------------------------->
+      <div id="title" class="step slide" data-x="0" data-y="0">
+        <h1>Three-Body Recombination in Cold Atomic Gases</h1><br>
+        <h4>PhD-defense by</h4><br>
+        <h3>Peder Klokmose Sørensen</h3><br>
+        <h4>Tuesday september 17th, 2013</h4>
+
+        <!--Load the script describing the figure-->
+        <script type="text/javascript" src="figures/three_particles.js">
+        </script>
+      <div id="three_particles" style="width:800px;height:150px;">
+      </div>
+      <table width="100%">
+        <tr>
+          <td>
+        <p>Supervisors</p>
+        <p>Dmitri V. Fedorov</p>
+        <p>Aksel S. Jensen </p>
+          </td>
+          <td style="text-align:right;vertical-align:bottom;">
+            <p>Aarhus University</p>
+          </td>
+        </tr>
+      </table>
+      </div>
+      <!--------------------------------------------------
+      Outline slide
+      -------------------------------------------------->
+      <div id="outline" class="step slide" data-x="1200" data-y="0">
+        <h1>Outline</h1>
+        <ul>
+          <li class="substep" id="step1">
+            Cold atomic physics
+            <img id="tree" src="images/tree.jpg" alt="Picture of a tree."
+            style="position:absolute;top:100px;left:600px;width:400px;">
+          </li>
+          <li class="substep">
+            Zero-range models
+            <img id="tree" src="images/tree.jpg" alt="Picture of a tree."
+            style="position:absolute;top:350px;left:600px;width:400px;">
+          </li>
+          <li class="substep">
+            Hyperspherical description
+            <img id="tree" src="images/tree.jpg" alt="Picture of a tree."
+            style="position:absolute;top:450px;left:300px;width:400px;">
+          </li>
+          <li class="substep">
+            Effective range corrections
+            <img id="tree" src="images/tree.jpg" alt="Picture of a tree."
+            style="position:absolute;top:400px;left:-25px;width:400px;">
+          </li>
+          <li class="substep">
+            Three-body recombination rate
+          </li>
+          <li class="substep">
+            Finite temperature effects
+          </li>
+        </ul>
+      </div>
+      <!--------------------------------------------------
+      Hyper-spherical coordinates
+      -------------------------------------------------->
+      <div id="hyper_coords_slide" class="step slide"
+        data-x="2400" data-y="0">
+
+        <!--Load the script describing the figure-->
+        <script type="text/javascript" src="figures/hyper_coords.js">
+        </script>
+
+        <!--First define all the text labels that are used in the figure-->
+        <!--They will be moved in the figures .js-file-->
+        <p id="r_12">\({\bf r}_{12}\)</p>
+        <p id="r_23">\({\bf r}_{23}\)</p>
+        <p id="r_13">\({\bf r}_{13}\)</p>
+        <p id="v1">\(1\)</p>
+        <p id="v2">\(2\)</p>
+        <p id="v3">\(3\)</p>
+        <p id="y_1">\({\bf y}_1\)</p>
+        <p id="x_1">\({\bf x}_2\)</p>
+        <p id="rho_def">
+        \[
+          \rho^2=x_1^2+y_1^2\quad,\quad
+          \rho\sin(\alpha_1)=x_1\quad,\quad
+          \rho\cos(\alpha_1)=y_1
+        \]
+        </p>
+
+        <!--Arranging items is best done via tables-->
+        <table>
+          <tr>
+            <td colspan="2" align="middle">
+              <h2>Hyper-spherical coordinates</h2>
+              <br>
+            </td>
+          </tr>
+          <tr>
+            <th>Cartesian coordinates</th>
+            <th>Jacobi coordinates</th>
+          </tr>
+          <tr>
+            <td colspan="2" align="middle">
+              <div id="hyper_coords" style="width:800px;height:450px;">
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!--------------------------------------------------
+      Optical potential model
+      -------------------------------------------------->
+      <div id="optical_model_slide" class="step slide"
+        data-x="3600" data-y="0" style="padding:70px 20px">
+
+        <!--Load the script describing the figure-->
+        <script type="text/javascript" src="figures/optical_model.js">
+        </script>
+
+        <!--Arranging items is best done via tables-->
+        <table class="fixed">
+          <tr>
+            <td style="width:13%;vertical-align:middle;" >
+              \(\dfrac{\nu_1^2-\frac{1}{4}}{2(\rho/a)^2}\)
+            </td>
+            <td style="width:87%">
+              <h3>Optical potential model</h3>
+              <div id="optical_model"
+                style="width:800px;height:450px"></div>
+            </td>
+          </tr>
+          <tr>
+            <td style="width:13%"></td>
+            <td style="width:87%;text-align:center">\(\rho/|a|\)</td>
+          </tr>
+        </table>
+      </div>
+      <!--------------------------------------------------
+      Three-body recombination rate for Li-7 for positive a
+      -------------------------------------------------->
+      <div id="fig2slide" class="step slide" data-x="4800" data-y="0"
+        style="padding:90px 20px">
+
+        <!--Load the script describing the figure-->
+        <script type="text/javascript"
+          src="figures/Li7recombination_positive_a.js"></script>
+
+        <!--Arranging items is best done via tables-->
+        <table class="fixed">
+          <tr>
+            <td style="width:10%;vertical-align:middle;
+              -webkit-transform: rotate(-90deg);
+              -moz-transform: rotate(-90deg);">
+              \(\alpha_\text{rec}[\text{cm}^6/\text{s}]\)
+            </td>
+            <td style="width:90%">
+              <h3> Three-body recombination rate</h3>
+              <div id="fig2" style="width:800px;height:450px"></div>
+            </td>
+          </tr>
+          <tr>
+            <td style="width:10%"></td>
+            <td style="width:90%;text-align:center">\(a[a_0]\)</td>
+          </tr>
+        </table>
+      </div>
+      <!--------------------------------------------------
+      Three-body recombination rate for Li-7 for negative a
+      -------------------------------------------------->
+      <div id="fig3slide" class="step slide" data-x="4800" data-y="800"
+        style="padding:90px 20px">
+
+        <!--Load the script describing the figure-->
+        <script type="text/javascript"
+          src="figures/Li7recombination_negative_a.js"></script>
+
+        <!--Arranging items is best done via tables-->
+        <table class="fixed">
+          <tr>
+            <td style="width:10%;vertical-align:middle;
+              -webkit-transform: rotate(-90deg);
+              -moz-transform: rotate(-90deg);">
+              \(\alpha_\text{rec}[\text{cm}^6/\text{s}]\)
+            </td>
+            <td style="width:90%">
+              <h3> Finite temperature effects</h3>
+              <div id="fig3" style="width:800px;height:450px"></div>
+            </td>
+          </tr>
+          <tr>
+            <td style="width:10%"></td>
+            <td style="width:90%;text-align:center">\(a[a_0]\)</td>
+          </tr>
+        </table>
+      </div>
+      <!--------------------------------------------------
+      Efimov spectrum
+      -------------------------------------------------->
+      <div id="efimov_spectrum_slide" class="step slide"
+        data-x="4800" data-y="1600" style="padding:90px 20px">
+
+        <!--Load the script describing the figure-->
+        <script type="text/javascript"
+          src="figures/efimov_spectrum.js"></script>
+
+        <!--Arranging items is best done via tables-->
+        <table class="fixed">
+          <tr>
+            <td style="width:15%;vertical-align:middle;
+              -webkit-transform: rotate(-90deg);
+              -moz-transform: rotate(-90deg);" >
+              \(-\left\vert E_T^{(n)}\dfrac{2ma_0^{2}}{\hbar^2}\right\vert^{1/8}\)
+            </td>
+            <td style="width:85%">
+              <h3> Efimov spectrum</h3>
+              <div id="efimov_spectrum" style="width:800px;height:450px">
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="width:15%"></td>
+            <td style="width:85%;text-align:center">\(\textrm{sign}(a)\times\left\vert\dfrac{a_0^2}{a^2}\right\vert^{1/8}\)</td>
+          </tr>
+        </table>
+      </div>
+
+      <!--This final slide shows all the slides together along with a-->
+      <!--thank you message-->
+      <div id="thank_you" class="step" data-x="2400" data-y="800"
+        data-scale="5">
+        <h1>Thank you for your attention</h1>
+      </div>
+      <!--------------------------------------------------
+      Done with all the slides
+      -------------------------------------------------->
+    </div> <!-- End <div id="impress"> -->
+
+    <!--Load impress.js-->
+    <script src="js/impress_substep.js"></script>
+    <script>
+      // Initialize impress.js
+      var api = impress();
+      api.init();
+
+      // This little thing enables the use of the mouse wheen to scroll
+      //through the slides
+      document.addEventListener("mousewheel", function(event){
+        if(event.wheelDelta > 0){
+          api.prev();
+        }
+        else{
+          api.next();
+        }
+      },false);
+
+      //function welcome(){
+        //var tree = document.getElementById("tree");
+        //tree.style.opacity=1;
+      //}
+      //function bye(){ alert("bye"); }
+      //var target = document.getElementById("outline");
+      //target.addEventListener("impress:stepleave",welcome,false);
+    </script>
+  </body>
+</html>
