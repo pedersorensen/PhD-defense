@@ -1,80 +1,77 @@
 $(document).ready(function(){
-    var canvas = document.getElementById('three_particles');
+    // For the title page (very first slide) a little animation of three
+    // particles 'orbiting' eachother is shown. This file describes this
+    // animation.
 
     //Create the canvas to draw on
-    var paper = Raphael(canvas, 800,300);
+    var paper = Raphael("three_particles", 500,300);
+    // Overall 'size' of the three-body system
+    var system_size = 100;
+    var animation_speed = 250;
+    // Initial hyper-angles and hyper-angular velocities
+    var alphai   = 0.8,
+        alphaxi  = 0.4,
+        alphayi  = 0.2,
+        valphai  = 0.5,
+        valphaxi = -0.04,
+        valphayi = 0.06;
 
-    //Practical coordinates and a radius
-    var x1 = -100, y1 = 0, x2 = -100, y2 = 0, x3 = -100, y3 = 0;
-    var r  = 15;
+    // Some practical constants
+    var sq2_3  = Math.sqrt(2/3),
+        sq6inv = 1/Math.sqrt(6),
+        sq2inv = 1/Math.sqrt(2);
 
-    var sq_rho_squared = 100;
-    var alphai   = Math.random()*2*Math.PI;
-    var alphaxi  = Math.random()*2*Math.PI;
-    var alphayi  = Math.random()*2*Math.PI;
-    var valphai  = (Math.random()-0.5)/10;
-    var valphaxi = (Math.random()-0.5)/10;
-    var valphayi = (Math.random()-0.5)/10;
-
-    alphai   = 0.8;
-    alphaxi  = 0.4;
-    alphayi  = 0.2;
-    valphai  = 0.0;
-    valphaxi = -0.05;
-    valphayi = 0.05;
-
-    console.log(alphai);
-    console.log(alphaxi);
-    console.log(alphayi);
-    console.log(valphai);
-    console.log(valphaxi);
-    console.log(valphayi);
-
-    var sq2_3 = Math.sqrt(2/3);
-    var sq6inv = 1/Math.sqrt(6);
-    var sq2inv = 1/Math.sqrt(2);
-    var cmx = 400, cmy = 100;
+    // Initial position of the particles, these dont matter much
+    var x0 = 400,
+        y0 = 100,
+    radius = 17;
 
     //Draw the spheres and give them a nice gradient
     var circle_attr = {"fill":"r(0.30,0.30)white-purple:60-purple"}
-    circ1 = paper.circle(x1,y1,r).attr(circle_attr);
-    circ2 = paper.circle(x2,y2,r).attr(circle_attr);
-    circ3 = paper.circle(x3,y3,r).attr(circle_attr);
-    function animateparticles(){
+    var circ1 = paper.circle(x0,y0,radius).attr(circle_attr);
+    var circ2 = paper.circle(x0,y0,radius).attr(circle_attr);
+    var circ3 = paper.circle(x0,y0,radius).attr(circle_attr);
+    function animate_particles(){
+        // This function increments the hyper-angles and calculates the
+        // new cartesian coordinates from the Jacobi-coordinates.
         alphai  += valphai;
         alphaxi += valphaxi;
         alphayi += valphayi;
         var sinalphai = Math.sin(alphai),
             cosalphai = Math.cos(alphai);
 
-    var xi1 = sq_rho_squared*sinalphai*Math.sin(alphaxi)
-        xi2 = sq_rho_squared*sinalphai*Math.cos(alphaxi)
-        yi1 = sq_rho_squared*cosalphai*Math.sin(alphayi)
-        yi2 = sq_rho_squared*cosalphai*Math.cos(alphayi);
+    var xi1 = system_size*sinalphai*Math.sin(alphaxi)
+        xi2 = system_size*sinalphai*Math.cos(alphaxi)
+        yi1 = system_size*cosalphai*Math.sin(alphayi)
+        yi2 = system_size*cosalphai*Math.cos(alphayi);
 
-    var dx1 = sq2_3*yi1+cmx-x1,
-        dy1 = sq2_3*yi2+cmy-y1,
-        dx2 = -yi1*sq6inv+xi1*sq2inv+cmx-x2,
-        dy2 = -yi2*sq6inv+xi2*sq2inv+cmy-y2,
-        dx3 = -yi1*sq6inv-xi1*sq2inv+cmx-x3,
-        dy3 = -yi2*sq6inv-xi2*sq2inv+cmy-y3;
+    var dx1 = sq2_3*yi1,
+        dy1 = sq2_3*yi2,
+        dx2 = -yi1*sq6inv+xi1*sq2inv,
+        dy2 = -yi2*sq6inv+xi2*sq2inv,
+        dx3 = -yi1*sq6inv-xi1*sq2inv,
+        dy3 = -yi2*sq6inv-xi2*sq2inv;
 
+    // And finally we animate by doing a relative transition
         var t1 = "t"+dx1+","+dy1;
         var t2 = "t"+dx2+","+dy2;
         var t3 = "t"+dx3+","+dy3;
-        circ1.animate({transform:t1},25);
-        circ2.animate({transform:t2},25);
-        circ3.animate({transform:t3},25,animateparticles);
+        // The animation run in parallel
+        circ1.animate({transform:t1},animation_speed);
+        circ2.animate({transform:t2},animation_speed);
+        // Only provide the callback (the last argument) in one of the
+        // animation commands, otherwise the number of animation instances
+        // would multiply by 3 on every run
+        circ3.animate({transform:t3},animation_speed,animate_particles);
     }
     function stop_animation(){
         circ1.stop();
         circ2.stop();
         circ3.stop();
     }
-    animateparticles();
-
+    // Only activate the animation when the title slide is active
     var title = document.getElementById("title");
-    title.addEventListener("impress:stepenter", animateparticles, false);
+    title.addEventListener("impress:stepenter", animate_particles, false);
     title.addEventListener("impress:stepleave", stop_animation, false);
 });
 

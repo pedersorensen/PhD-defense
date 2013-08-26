@@ -211,25 +211,29 @@ h1 {
     font-size: 40pt;
     text-align: center;
     line-height:45pt;
+    padding-bottom:15px;
 }
 h2 {
     font-size: 35pt;
     text-align: center;
     line-height:35pt;
+    padding-bottom:15px;
 }
 h3 {
     font-size: 30pt;
     text-align: center;
     line-height:25pt;
+    padding-bottom:15px;
 }
 h4 {
     font-size: 20pt;
     text-align: center;
     line-height:15pt;
+    padding-bottom:15px;
 }
 p{
     font-size:20pt;
-    line-height:20pt;
+    line-height:25pt;
 }
 /********************
  *  Table settings  *
@@ -250,13 +254,10 @@ td{
  *  outline slide  *
  *******************/
 /*List settings*/
-ul {
+#outline ul {
     list-style-type:circle;
     font-size:30pt;
     line-height:40pt;
-}
-ol {
-    list-style-type:lower-alpha;
 }
 /* Some play with scaling, this is copy paste from the demo slides
 
@@ -288,6 +289,9 @@ ol {
 /************************
  *  hyper_coords_slide  *
  ************************/
+#hyper_coords_slide th{
+    font-size:25pt;
+}
 
 /********************
  *  Optical model  *
@@ -327,9 +331,14 @@ ol {
 /********************
  *  Figure 2 slide  *
  ********************/
-
-
-
+/******************************
+ *  Finite temperature slide  *
+ ******************************/
+#finite_temperature ul{
+    list-style-type:circle;
+    font-size:20pt;
+    line-height:30pt;
+}
 /**************************************************
  *  The overview slide with the thank you notice  *
  **************************************************/
@@ -349,4 +358,3 @@ ol {
 
     font-family: 'Open Sans', Arial, sans-serif;
 }
-/*'#' indicates id="...", '.' indicates class = "..."*/

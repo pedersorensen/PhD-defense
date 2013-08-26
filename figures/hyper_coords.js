@@ -1,7 +1,7 @@
 window.onload = function()
 {
     var canvas = document.getElementById('hyper_coords');
-    var DX = 75, DY = 185;
+    var DX = 75, DY = 205;
 
     function moveId(elementId, x, y) {
         //Move an element given by it elementId to position (x,y) relative
@@ -61,12 +61,6 @@ window.onload = function()
     moveId("v3",x3-50,y3+50);
     moveId("rho_def",50,350);
 
-    //Now to draw the same spheres with Jacobi-coordinates
-    //Start by moving everyting to the right
-    x1 += 400;
-    x2 += 400;
-    x3 += 400;
-
     //Alternate emthod of setting the same attributes for several elements
     //All elements created between setStart() and setFinish() are "caught"
     //and stored in the 'st' variable
@@ -78,11 +72,77 @@ window.onload = function()
     //Apply attributes to all the "caught" elements ine one go
     st.attr({"fill":"r(0.30,0.30)white-purple:60-purple"});
 
+    // Now everything is translated to the right
+    var DX2 = 400;
+    x1 += DX2; x2 += DX2; x3 += DX2;
     //Midpoint between particle 2 and 3
-    var xm = (x2+x3)/2, ym = (y2+y3)/2
+    var xm = (x2+x3)/2, ym = (y2+y3)/2;
 
-    arrow(x3,y3,x2,y2,r).attr(line_attr);
-    arrow(xm,ym,x1,y1,0,r).attr(line_attr);
-    moveId("x_1",xm+30,ym+20);
-    moveId("y_1",xm-30,ym-50);
+    // The jacobi coordinate vectors x_1 and y_1 are properly positioned
+    // and then hidden
+    line_attr.opacity = 0;
+    var arr1 = arrow(x3,y3,x2,y2,r).attr(line_attr);
+    var arr2 = arrow(xm,ym,x1,y1,0,r).attr(line_attr);
+    // Move the labels for x_1 and y_1 into place and hide them
+    moveId("x_1",xm+30,ym+20).style.opacity = 0;
+    moveId("y_1",xm-30,ym-50).style.opacity = 0;
+    moveId("jacobi_coordinates",510,-11).style.opacity = 0;
+
+    // Here a second jacobi set
+    var xm = (x3+x1)/2, ym = (y3+y1)/2;
+    var arr3 = arrow(x1,y1,x3,y3,r).attr(line_attr);
+    var arr4 = arrow(xm,ym,x2,y2,0,r).attr(line_attr);
+    moveId("x_2",xm-20,ym+10).style.opacity = 0;
+    moveId("y_2",xm+50,ym-50).style.opacity = 0;
+
+    // And a third
+    var xm = (x1+x2)/2, ym = (y1+y2)/2;
+    var arr5 = arrow(x2,y2,x1,y1,r).attr(line_attr);
+    var arr6 = arrow(xm,ym,x3,y3,0,r).attr(line_attr);
+    moveId("x_3",xm,ym-20).style.opacity = 0;
+    moveId("y_3",xm+30,ym+60).style.opacity = 0;
+
+    function animate_jacobi(dx){
+        var t1 = "t"+dx+","+0;
+        st.animate({transform:t1},1000,show_labels1);
+    }
+    function show_labels1(dx){
+        $("#jacobi_coordinates").animate({opacity:1},1000,'linear');
+        $("#x_1").animate({opacity:1},1000,'linear');
+        $("#y_1").animate({opacity:1},1000,'linear');
+        arr1.animate({opacity:1},1000,'linear');
+        arr2.animate({opacity:1},1000,'linear');
+    }
+    function show_labels2(dx){
+        $("#x_1").animate({opacity:0},1000,'linear');
+        $("#y_1").animate({opacity:0},1000,'linear');
+        arr1.animate({opacity:0},1000,'linear');
+        arr2.animate({opacity:0},1000,'linear');
+        $("#x_2").animate({opacity:1},1000,'linear');
+        $("#y_2").animate({opacity:1},1000,'linear');
+        arr3.animate({opacity:1},1000,'linear');
+        arr4.animate({opacity:1},1000,'linear');
+    }
+    function show_labels3(dx){
+        $("#x_2").animate({opacity:0},1000,'linear');
+        $("#y_2").animate({opacity:0},1000,'linear');
+        arr3.animate({opacity:0},1000,'linear');
+        arr4.animate({opacity:0},1000,'linear');
+        $("#x_3").animate({opacity:1},1000,'linear');
+        $("#y_3").animate({opacity:1},1000,'linear');
+        arr5.animate({opacity:1},1000,'linear');
+        arr6.animate({opacity:1},1000,'linear');
+    }
+    var show_jacobi1 = document.getElementById("show_jacobi1");
+    show_jacobi1.addEventListener("impress:substep-enter", function(){
+        animate_jacobi(DX2);
+    });
+    var show_jacobi2 = document.getElementById("show_jacobi2");
+    show_jacobi2.addEventListener("impress:substep-enter", function(){
+        show_labels2();
+    });
+    var show_jacobi3 = document.getElementById("show_jacobi3");
+    show_jacobi3.addEventListener("impress:substep-enter", function(){
+        show_labels3();
+    });
 }

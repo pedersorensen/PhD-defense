@@ -1,5 +1,10 @@
 function sign(x) {
+    // Returns +1 of x is positive, -1 of x is negative, 0 is x is 0
     return x ? x < 0 ? -1 : 1 : 0;
+}
+function sign_string(x) {
+    // Return '+' if x is positive or zero and '-' if x in negative
+    return x < 0 ? '-' : '+';
 }
 function hex2rgb(col) {
     // Parse a html hex color of the format col="#rrggbb"

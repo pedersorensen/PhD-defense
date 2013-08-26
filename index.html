@@ -44,28 +44,30 @@
       Title slide
       -------------------------------------------------->
       <div id="title" class="step slide" data-x="0" data-y="0">
-        <h1>Three-Body Recombination in Cold Atomic Gases</h1><br>
-        <h4>PhD-defense by</h4><br>
+        <h1>Three-Body Recombination in Cold Atomic Gases</h1>
+        <h4>PhD-defense by</h4>
         <h3>Peder Klokmose Sørensen</h3><br>
         <h4>Tuesday september 17th, 2013</h4>
 
         <!--Load the script describing the figure-->
         <script type="text/javascript" src="figures/three_particles.js">
         </script>
-      <div id="three_particles" style="width:800px;height:150px;">
-      </div>
-      <table width="100%">
-        <tr>
-          <td>
-        <p>Supervisors</p>
-        <p>Dmitri V. Fedorov</p>
-        <p>Aksel S. Jensen </p>
-          </td>
-          <td style="text-align:right;vertical-align:bottom;">
-            <p>Aarhus University</p>
-          </td>
-        </tr>
-      </table>
+        <div id="three_particles" style="width:800px;height:150px;">
+        </div>
+        <table width="100%">
+          <tr>
+            <td>
+              <p> Supervisors:<br>
+                Dmitri V. Fedorov<br>
+                Aksel S. Jensen </p>
+            </td>
+            <td style="text-align:right;vertical-align:bottom;">
+              <p> Department of Physics<br>
+                and Astronomy<br>
+                Aarhus University </p>
+            </td>
+          </tr>
+        </table>
       </div>
       <!--------------------------------------------------
       Outline slide
@@ -120,14 +122,13 @@
         <p id="v2">\(2\)</p>
         <p id="v3">\(3\)</p>
         <p id="y_1">\({\bf y}_1\)</p>
-        <p id="x_1">\({\bf x}_2\)</p>
-        <p id="rho_def">
-        \[
-          \rho^2=x_1^2+y_1^2\quad,\quad
-          \rho\sin(\alpha_1)=x_1\quad,\quad
-          \rho\cos(\alpha_1)=y_1
-        \]
-        </p>
+        <p id="x_1">\({\bf x}_1\)</p>
+        <p id="y_2">\({\bf y}_2\)</p>
+        <p id="x_2">\({\bf x}_2\)</p>
+        <p id="y_3">\({\bf y}_3\)</p>
+        <p id="x_3">\({\bf x}_3\)</p>
+        <p id="jacobi_coordinates" style="font-size:25pt;">
+        Jacobi coordinates</p>
 
         <!--Arranging items is best done via tables-->
         <table>
@@ -139,7 +140,7 @@
           </tr>
           <tr>
             <th>Cartesian coordinates</th>
-            <th>Jacobi coordinates</th>
+            <th style="opacity:0">Jacobi coordinates</th>
           </tr>
           <tr>
             <td colspan="2" align="middle">
@@ -148,6 +149,16 @@
             </td>
           </tr>
         </table>
+        <div class="substep" id="show_jacobi1"></div>
+        <div class="substep" id="show_jacobi2"></div>
+        <div class="substep" id="show_jacobi3"></div>
+        <p id="rho_def" class="substep">
+        \[
+          \rho^2=x_i^2+y_i^2\quad,\quad
+          \rho\sin(\alpha_i)=x_i\quad,\quad
+          \rho\cos(\alpha_i)=y_i
+        \]
+        </p>
       </div>
       <!--------------------------------------------------
       Optical potential model
@@ -264,6 +275,33 @@
             <td style="width:85%;text-align:center">\(\textrm{sign}(a)\times\left\vert\dfrac{a_0^2}{a^2}\right\vert^{1/8}\)</td>
           </tr>
         </table>
+      </div>
+      <!--------------------------------------------------
+      Finite temperature effects
+      -------------------------------------------------->
+      <div id="finite_temperature" class="step slide"
+        data-x="3600" data-y="1600">
+        <h1>Finite temperature effects</h1>
+        <ul>
+          <!--Need id's to detect when the substep is entered-->
+          <li class="substep">
+            Experimental performed at fixed temperature, not
+            fixed energy.
+          </li>
+          <li class="substep" id="average_equation">
+            Perform thermal average
+            \[
+              \langle\alpha_\text{rec}(a)\rangle_T= \frac{1}{2(k_BT)^3}
+              \int E^2e^{-E/k_BT}\alpha_\text{rec}(a,E)\;dE
+            \]
+          </li>
+        </ul>
+        <div>
+          <img class="substep" src="images/tree.jpg"
+            style="height:250px;float:left;">
+          <img class="substep" src="images/bird.jpg"
+            style="height:250px;float:left;">
+        </div>
       </div>
 
       <!--This final slide shows all the slides together along with a-->

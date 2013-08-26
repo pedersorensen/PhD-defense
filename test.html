@@ -34,46 +34,100 @@
     <div id="impress" class="impress-not-supported">
       <div class="fallback-message">
         <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
-        <p>For the best experience please use the latest <b>Chrome</b> or <b>Safari</b> browser. Firefox 10 (to be released soon) will also handle it.</p>
+        <p>For the best experience please use the latest <b>Chrome</b> or
+        <b>Firefox</b> browser.</p>
       </div>
       <!--------------------------------------------------
       Title Slide
       -------------------------------------------------->
       <div id="title" class="step slide" data-x="0" data-y="0">
-        <h1>Three-Body Recombination in Cold Atomic Gases</h1><br>
-        <h4>PhD-defense by</h4><br>
+        <h1>Three-Body Recombination in Cold Atomic Gases</h1>
+        <h4>PhD-defense by</h4>
         <h3>Peder Klokmose Sørensen</h3><br>
         <h4>Tuesday september 17th, 2013</h4>
 
         <!--Load the script describing the figure-->
         <script type="text/javascript" src="figures/three_particles.js">
         </script>
-      <div id="three_particles" style="width:800px;height:150px;">
-      </div>
-      <table width="100%">
-        <tr>
-          <td>
-        <p>Supervisors</p>
-        <p>Dmitri V. Fedorov</p>
-        <p>Aksel S. Jensen </p>
-          </td>
-          <td style="text-align:right;vertical-align:bottom;">
-            <p>Aarhus University</p>
-          </td>
-        </tr>
-      </table>
+        <div id="three_particles" style="width:800px;height:150px;">
+        </div>
+        <table width="100%">
+          <tr>
+            <td>
+              <p> Supervisors:<br>
+                Dmitri V. Fedorov<br>
+                Aksel S. Jensen </p>
+            </td>
+            <td style="text-align:right;vertical-align:bottom;">
+              <p> Department of Physics<br>
+                and Astronomy<br>
+                Aarhus University </p>
+            </td>
+          </tr>
+        </table>
       </div>
       <!--------------------------------------------------
-      Presentation outline page
+      Hyper-spherical coordinates
       -------------------------------------------------->
-      <div id="finite_temperature" class="step slide" 
-        data-x="1200" data-y="0">
+      <div id="hyper_coords_slide" class="step slide"
+        data-x="2400" data-y="0">
+
+        <!--Load the script describing the figure-->
+        <script type="text/javascript" src="figures/hyper_coords.js">
+        </script>
+
+        <!--First define all the text labels that are used in the figure-->
+        <!--They will be moved in the figures .js-file-->
+        <p id="r_12">\({\bf r}_{12}\)</p>
+        <p id="r_23">\({\bf r}_{23}\)</p>
+        <p id="r_13">\({\bf r}_{13}\)</p>
+        <p id="v1">\(1\)</p>
+        <p id="v2">\(2\)</p>
+        <p id="v3">\(3\)</p>
+        <p id="y_1">\({\bf y}_1\)</p>
+        <p id="x_1">\({\bf x}_1\)</p>
+        <p id="y_2">\({\bf y}_2\)</p>
+        <p id="x_2">\({\bf x}_2\)</p>
+        <p id="y_3">\({\bf y}_3\)</p>
+        <p id="x_3">\({\bf x}_3\)</p>
+        <p id="jacobi_coordinates" style="font-size:25pt;">
+        Jacobi coordinates</p>
+
+        <!--Arranging items is best done via tables-->
+        <table>
+          <tr>
+            <td colspan="2" align="middle">
+              <h2>Hyper-spherical coordinates</h2>
+              <br>
+            </td>
+          </tr>
+          <tr>
+            <th>Cartesian coordinates</th>
+            <th style="opacity:0">Jacobi coordinates</th>
+          </tr>
+          <tr>
+            <td colspan="2" align="middle">
+              <div id="hyper_coords" style="width:800px;height:450px;">
+              </div>
+            </td>
+          </tr>
+        </table>
+        <div class="substep" id="show_jacobi1"></div>
+        <div class="substep" id="show_jacobi2"></div>
+        <div class="substep" id="show_jacobi3"></div>
+        <p id="rho_def" class="substep">
+        \[
+          \rho^2=x_i^2+y_i^2\quad,\quad
+          \rho\sin(\alpha_i)=x_i\quad,\quad
+          \rho\cos(\alpha_i)=y_i
+        \]
+        </p>
       </div>
       <!--------------------------------------------------
       Overview slide
       -------------------------------------------------->
       <div id="overvies" class="step" data-x="600" data-y="0"
-        data-scale="3">
+        data-scale="3" style="width:10px;height:10px;">
       </div>
       <!--------------------------------------------------
       Done with all the slides
@@ -97,14 +151,6 @@
           api.next();
         }
       },false);
-
-      //function welcome(){
-        //var tree = document.getElementById("tree");
-        //tree.style.opacity=1;
-      //}
-      //function bye(){ alert("bye"); }
-      //var target = document.getElementById("outline");
-      //target.addEventListener("impress:stepleave",welcome,false);
     </script>
   </body>
 </html>
