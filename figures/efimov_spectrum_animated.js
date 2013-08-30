@@ -1433,10 +1433,80 @@ var data3r = [
     [262.6575689353197,-1.552176842558955e-05],
     [253.0269838758018,-1.657416110559897e-05]
     ];
+$(document).ready(function() {
+    //Create the canvas to draw on
+    var paper = Raphael("animated_graph", 790, 460);
 
-$(document).ready(function(){
-    R0=-5;
-    function R(a) {return R0*Math.pow(1-1/a,2);}
+    var xmin = -1, xmax = 1, ymin = -1, ymax = 0;
+    var l = 50, t = 10, r = 775, b = 415;
+    paper.rect(l,t,r-l,b-t).attr({'stroke-width':3});
+
+    var A = (t-b)/(ymax-ymin),
+        B = (b*ymax-t*ymin)/(ymax-ymin)
+        C = (l-r)/(xmin-xmax),
+        D = (r*xmin-l*xmax)/(xmin-xmax);
+
+    function transX(x) {return C*x+D;}
+    function transY(y) {return A*y+B;}
+    function get_plot_path(P){
+        var path = "M"+transX(P[0][0])+","+transY(P[0][1]);
+        for(var i = 1;i<P.length;++i){
+            var xt = transX(P[i][0]);
+            var yt = transY(P[i][1]);
+            path += "L"+xt+","+yt;
+        }
+        return path
+    }
+    var grid_attr = {'stroke-width':0.3};
+    var text_attr = {"font-size":25, fill:"#555555"};
+    function draw_grid(x_grid,y_grid){
+        // Draw vertical grid lines
+        x_grid.forEach(function(x){
+            var xt = transX(x);
+            var ymin = transY(y_grid[0])
+            var path = "M"+xt+","+ymin;
+            path += "L"+xt+","+transY(y_grid[y_grid.length-1]);
+            paper.path(path).attr(grid_attr);
+            paper.text(xt,ymin+20,x).attr(text_attr)
+        })
+        // Draw horizontal grid lines
+        y_grid.forEach(function(y){
+            var yt = transY(y);
+            var xmin = transX(x_grid[0])
+            var path = "M"+xmin+","+yt;
+            path += "L"+transX(x_grid[x_grid.length-1])+","+yt;
+            paper.path(path).attr(grid_attr);
+            paper.text(xmin-30, yt, y).attr(text_attr)
+        })
+    }
+    // x- and y-values where the grid should be drawn
+    var x_grid = [-1, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75, 1.0]
+        y_grid = [-1, -0.8, -0.6, -0.4, -0.2, 0.0];
+    draw_grid(x_grid, y_grid);
+    // The text that indicates the channel number n = 0, 1, 2
+    paper.text(transX(0), transY(-0.67), "n = 0").attr(text_attr);
+    paper.text(transX(0), transY(-0.36), "n = 1").attr(text_attr);
+    paper.text(transX(0), transY(-0.19), "n = 2").attr(text_attr);
+    // Now to draw the legend
+    text_attr["text-anchor"] = "start";
+    var legend1 = paper.text(transX(0.40), transY(-0.07), "Single-channel").attr(text_attr);
+    // For the two-channel and effective range expansion the legends start
+    // out hidden and get revealed later
+    text_attr.opacity = 0;
+    var legend2 = paper.text(transX(0.40), transY(-0.07), "Two-channel").attr(text_attr);
+    var legend3 = paper.text(transX(0.40), transY(-0.07), "Effective range exp.").attr(text_attr);
+
+    var legend_rect1 = paper.rect(transX(0.3), transY(-0.055), 30, 15);
+    var legend_rect2 = paper.rect(transX(0.3), transY(-0.055), 30, 15);
+    var legend_rect3 = paper.rect(transX(0.3), transY(-0.055), 30, 15);
+    legend_rect1.attr({fill:"red"});
+    legend_rect2.attr({fill:"blue",opacity:0});
+    legend_rect3.attr({fill:"#00ff00",opacity:0});
+
+    var R0 = -5;
+    function R(a) {
+        return R0*Math.pow(1-1/a,2);
+    }
     var threshold = data1s.slice(61).map(function(val){
         var a = val[0];
         var E = -1/Math.pow(R(a),2)*Math.pow(1-Math.sqrt(1-2*R(a)/a),2);
@@ -1465,61 +1535,49 @@ $(document).ready(function(){
     data2r = data2r.map(Transformer);
     data3r = data3r.map(Transformer);
     threshold = threshold.map(Transformer);
-    //data1s.map(function(v){
-        //console.log(v[0] + " , " +v[1]);
-    //})
 
-    var options = {
-        legend:{
-            position:"ne",
-            margin:20,
-            backgroundOpacity:0
-        },
-        xaxis: {
-            min:-1,
-            max:1,
-            font:{size:25,color:"#555555"},
-        },
-        yaxis: {
-            min:-1,
-            max:0,
-            font:{size:25,color:"#555555"}
-        },
+    var line_attr = {
+        'stroke':'red',
+        'stroke-width':3,
+        'clip-rect': l+ " " + t + " " + (r-l) + " " + (b-t)
     }
+    // First get all the plot data ready
+    var path1s = get_plot_path(data1s);
+    var path1d = get_plot_path(data1d);
+    var path1r = get_plot_path(data1r);
+    var path2s = get_plot_path(data2s);
+    var path2d = get_plot_path(data2d);
+    var path2r = get_plot_path(data2r);
+    var path3s = get_plot_path(data3s);
+    var path3d = get_plot_path(data3d);
+    var path3r = get_plot_path(data3r);
+    var path_th = get_plot_path([[0,0],[1,-1]]);
+    var path_th_r = get_plot_path(threshold);
 
-    var placeholder = $("#efimov_spectrum");
-    var plot = $.plot(placeholder,
-        [
-        { color:"red", data:[[0,0],[1,-1]], },
-        { color:"#00FF00", data:threshold, },
-        { label:"\\(\\text{Single-channel}\\)",
-          color:"red", data:data1s, },
-        { color:"red", data:data2s, },
-        { color:"red", data:data3s, },
-        { label:"\\(\\text{Two-channel}\\)",
-          color:"blue", data:data1d, },
-        { color:"blue", data:data2d, },
-        { color:"blue", data:data3d, },
-        { label:"\\(\\text{Effective range exp.}\\)",
-          color:"#00FF00", data:data1r, },
-        { color:"#00FF00", data:data2r, },
-        { color:"#00FF00", data:data3r, },
-        ],
-        options);
+    // Start by plotting all the curves using the single-channel data only
+    var line1s = paper.path(path1s).attr(line_attr);
+    var line1d = paper.path(path1s).attr(line_attr);
+    var line1r = paper.path(path1s).attr(line_attr);
+    var line2s = paper.path(path2s).attr(line_attr);
+    var line2d = paper.path(path2s).attr(line_attr);
+    var line2r = paper.path(path2s).attr(line_attr);
+    var line3s = paper.path(path3s).attr(line_attr);
+    var line3d = paper.path(path3s).attr(line_attr);
+    var line3r = paper.path(path3s).attr(line_attr);
+    var line_th = paper.path(path_th).attr(line_attr);
+    var line_th_r = paper.path(path_th).attr(line_attr);
 
-        var o = plot.pointOffset({ x: -0.1, y: -0.63});
-        placeholder.append(
-                "<div style = 'position:absolute;left:" +
-                o.left + "px;top:" + o.top +
-                "px;font-size:smaller'>\\(n=0\\)</div>");
-        var o = plot.pointOffset({ x: -0.1, y: -0.33});
-        placeholder.append(
-                "<div style = 'position:absolute;left:" +
-                o.left + "px;top:" + o.top +
-                "px;font-size:smaller'>\\(n=1\\)</div>");
-        var o = plot.pointOffset({ x: -0.1, y: -0.15});
-        placeholder.append(
-                "<div style = 'position:absolute;left:" +
-                o.left + "px;top:" + o.top +
-                "px;font-size:smaller'>\\(n=2\\)</div>");
+    $("#morf_efimov_graph").on("impress:substep-enter", function(){
+        line1d.animate({path:path1d,stroke:'blue'}, 1000);
+        line1r.animate({path:path1r,stroke:'#00ff00'}, 1000);
+        line2d.animate({path:path2d,stroke:'blue'}, 1000);
+        line2r.animate({path:path2r,stroke:'#00ff00'}, 1000);
+        line3d.animate({path:path3d,stroke:'blue'}, 1000);
+        line3r.animate({path:path3r,stroke:'#00ff00'}, 1000);
+        line_th_r.animate({path:path_th_r,stroke:'#00ff00'}, 1000);
+        legend2.animate({y:transY(-0.14),opacity:1},1000)
+        legend3.animate({y:transY(-0.21),opacity:1},1000)
+        legend_rect2.animate({y:transY(-0.125), opacity:1},1000)
+        legend_rect3.animate({y:transY(-0.195), opacity:1},1000)
+    });
 });

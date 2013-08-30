@@ -62,7 +62,6 @@ function bezier4(p0,p1,p2,p3,N) {
     }
     return data
 }
-
 /******************************
  *  Stuff to use for Flot.js  *
  ******************************/

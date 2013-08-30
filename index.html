@@ -47,7 +47,7 @@
         <h1>Three-Body Recombination in Cold Atomic Gases</h1>
         <h4>PhD-defense by</h4>
         <h3>Peder Klokmose Sørensen</h3><br>
-        <h4>Tuesday september 17th, 2013</h4>
+        <h4>Tuesday September 17th, 2013</h4>
 
         <!--Load the script describing the figure-->
         <script type="text/javascript" src="figures/three_particles.js">
@@ -273,9 +273,9 @@
 
         <!--Load the script describing the figure-->
         <script type="text/javascript"
-          src="figures/efimov_spectrum.js"></script>
+          src="figures/efimov_spectrum_animated.js">
+        </script>
 
-        <!--Arranging items is best done via tables-->
         <table class="fixed">
           <tr>
             <td style="width:15%;vertical-align:middle;
@@ -285,7 +285,7 @@
             </td>
             <td style="width:85%">
               <h3> Efimov spectrum</h3>
-              <div id="efimov_spectrum" style="width:800px;height:450px">
+              <div id="animated_graph" style="width:800px;height:450px">
               </div>
             </td>
           </tr>
@@ -294,6 +294,8 @@
             <td style="width:85%;text-align:center">\(\textrm{sign}(a)\times\left\vert\dfrac{a_0^2}{a^2}\right\vert^{1/8}\)</td>
           </tr>
         </table>
+        <div class="substep" id="morf_efimov_graph"></div>
+
       </div>
       <!--------------------------------------------------
       Finite temperature effects
@@ -320,6 +322,44 @@
             style="height:250px;float:left;">
           <img class="substep" src="images/bird.jpg"
             style="height:250px;float:left;">
+        </div>
+      </div>
+      <!--------------------------------------------------
+      Mass-imbalanced systems
+      -------------------------------------------------->
+      <div id="mass_imbalanced_slide" class="step slide"
+        data-x="2400" data-y="1600">
+        <!--[>Load the script describing the figure<]-->
+        <script type="text/javascript" src="figures/mass_imbalanced.js">
+        </script>
+        <h2>Mass-imbalanced systems</h2>
+        <br>
+        <table>
+          <tr>
+            <td style="width:35%">
+              <div id="mass_imbalanced" style="width:250px;height:200px;">
+              </div>
+            <div class="substep" id="decrease_ball"></div>
+            </td>
+            <td style="width:65%;text-align:left;vertical-align:top">
+              <ul>
+                <li class="substep">
+                  For instance the system of &nbsp;
+                  <sup>133</sup>Cs &ndash; <sup>7</sup>Li
+                </li>
+                <li class="substep">
+                  Mass ratio of ~19 fairly large
+                </li>
+                <li class="substep">
+                  Scaling ratio reduced down to ~4.8
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+        <div class="substep">
+          This leads to almost twice as many interference features in any
+          given scattering length range for for the equal mass system
         </div>
       </div>
 
@@ -352,13 +392,12 @@
         }
       },false);
 
-      //function welcome(){
-        //var tree = document.getElementById("tree");
-        //tree.style.opacity=1;
-      //}
-      //function bye(){ alert("bye"); }
-      //var target = document.getElementById("outline");
-      //target.addEventListener("impress:stepleave",welcome,false);
+      document.addEventListener("keydown", function(event){
+        // Go to the overview slide when pressing the escape key
+        if(event.keyCode === 27 /* value of esc*/){
+          api.goto("thank_you")
+        }
+      });
     </script>
   </body>
 </html>

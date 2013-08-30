@@ -317,7 +317,6 @@ td{
 }
 /*Typeset the legend*/
 .figure-container table, th, td{
-    /*border:1px solid black;*/
     background:transparent;
 }
 .figure-container td{
@@ -339,6 +338,42 @@ td{
     font-size:20pt;
     line-height:30pt;
 }
+/***************************
+ *  Mass-imbalanced slide  *
+ ***************************/
+#mass_imbalanced_slide table{
+    table-layout:fixed;
+    width:100%;
+}
+#mass_imbalanced_slide .substep {
+    opacity: 0.3;
+}
+#mass_imbalanced_slide .substep.active {
+    opacity: 1;
+}
+#mass_imbalanced_slide ul{
+    list-style-type:circle;
+    font-size:24pt;
+    line-height:45pt;
+}
+
+sub {
+    vertical-align:text-bottom;
+    font-size:65%;
+    line-height:100%;
+}
+sup {
+    vertical-align:text-top;
+    font-size:65%;
+    line-height:100%;
+}
+/*********
+ *  efimov_spectrum_slide  *
+ *********/
+table, tr,td{
+    /*border:1px solid black;*/
+}
+
 /**************************************************
  *  The overview slide with the thank you notice  *
  **************************************************/

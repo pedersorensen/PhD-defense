@@ -21,9 +21,6 @@
     <!--flot.js is used to plot data-->
     <script type="text/javascript" src="js/flot/jquery.flot.js"></script>
 
-    <!--A sprintf implementation for JavaScript-->
-    <script type="text/javascript" src="js/sprintf.min.js"></script>
-
     <!--MathJax allow using tex/latex typesetting of equations-->
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!--Or use a local copy-->
@@ -54,14 +51,14 @@
         </script>
         <div id="three_particles" style="width:800px;height:150px;">
         </div>
-        <table width="100%">
+        <table style="width:100%">
           <tr>
-            <td>
+            <td style="width:50%">
               <p> Supervisors:<br>
                 Dmitri V. Fedorov<br>
                 Aksel S. Jensen </p>
             </td>
-            <td style="text-align:right;vertical-align:bottom;">
+            <td style="width:50%;text-align:right;vertical-align:bottom;">
               <p> Department of Physics<br>
                 and Astronomy<br>
                 Aarhus University </p>
@@ -70,85 +67,77 @@
         </table>
       </div>
       <!--------------------------------------------------
-      Hyper-spherical coordinates
+      Mass-imbalanced systems
       -------------------------------------------------->
-      <div id="hyper_coords_slide" class="step slide"
-        data-x="2400" data-y="0">
-
-        <!--Load the script describing the figure-->
-        <script type="text/javascript" src="figures/hyper_coords.js">
+      <div id="mass_imbalanced_slide" class="step slide"
+        data-x="1200" data-y="0">
+        <!--[>Load the script describing the figure<]-->
+        <script type="text/javascript" src="figures/mass_imbalanced.js">
         </script>
-
-        <!--First define all the text labels that are used in the figure-->
-        <!--They will be moved in the figures .js-file-->
-        <p id="r_12">\({\bf r}_{12}\)</p>
-        <p id="r_23">\({\bf r}_{23}\)</p>
-        <p id="r_13">\({\bf r}_{13}\)</p>
-        <p id="v1">\(1\)</p>
-        <p id="v2">\(2\)</p>
-        <p id="v3">\(3\)</p>
-        <p id="y_1">\({\bf y}_1\)</p>
-        <p id="x_1">\({\bf x}_1\)</p>
-        <p id="y_2">\({\bf y}_2\)</p>
-        <p id="x_2">\({\bf x}_2\)</p>
-        <p id="y_3">\({\bf y}_3\)</p>
-        <p id="x_3">\({\bf x}_3\)</p>
-        <p id="jacobi_coordinates" style="font-size:25pt;">
-        Jacobi coordinates</p>
-
-        <!--Arranging items is best done via tables-->
+        <h2>Mass-imbalanced systems</h2>
+        <br>
         <table>
           <tr>
-            <td colspan="2" align="middle">
-              <h2>Hyper-spherical coordinates</h2>
-              <br>
-            </td>
-          </tr>
-          <tr>
-            <th>Cartesian coordinates</th>
-            <th style="opacity:0">Jacobi coordinates</th>
-          </tr>
-          <tr>
-            <td colspan="2" align="middle">
-              <div id="hyper_coords" style="width:800px;height:450px;">
+            <td style="width:35%">
+              <div id="mass_imbalanced" style="width:250px;height:200px;">
               </div>
+            <div class="substep" id="decrease_ball"></div>
+            </td>
+            <td style="width:65%;text-align:left;vertical-align:top">
+              <ul>
+                <li class="substep">
+                  For instance the system of &nbsp;
+                  <sup>133</sup>Cs &ndash; <sup>7</sup>Li
+                </li>
+                <li class="substep">
+                  Mass ratio of ~19 fairly large
+                </li>
+                <li class="substep">
+                  Scaling ratio reduced down to ~4.8
+                </li>
+              </ul>
             </td>
           </tr>
         </table>
-        <div class="substep" id="show_jacobi1"></div>
-        <div class="substep" id="show_jacobi2"></div>
-        <div class="substep" id="show_jacobi3"></div>
-        <p id="rho_def" class="substep">
-        \[
-          \rho^2=x_i^2+y_i^2\quad,\quad
-          \rho\sin(\alpha_i)=x_i\quad,\quad
-          \rho\cos(\alpha_i)=y_i
-        \]
-        </p>
+        <div class="substep">
+          This leads to almost twice as many interference features in any
+          given scattering length range for for the equal mass system
+        </div>
       </div>
       <!--------------------------------------------------
-      Hyper-spherical coordinates II
+      Efimov spectrum animated
       -------------------------------------------------->
-      <div id="hyper_coords_slide2" class="step slide"
-        data-x="2400" data-y="-800">
+      <!--<div id="efimov_spectrum_animated_slide" class="step slide"-->
+        <!--data-x="2400" data-y="0" style="padding:90px 20px">-->
+        <!--[>Load the script describing the figure<]-->
+        <!--<script type="text/javascript"-->
+          <!--src="figures/efimov_spectrum_animated.js">-->
+        <!--</script>-->
 
-        <!--Load the script describing the figure-->
-        <script type="text/javascript" src="figures/hyper_coords2.js">
-        </script>
-        <h2>Hyper-spherical coordinates II</h2>
-        <div id="hyper_coords2" style="width:800px;height:450px;">
-        </div>
-        <p id="alpha_i">\(\alpha\qquad\quad\;\pi\)</p>
-        <p id="rho">\(\rho\qquad\; r_0\)</p>
-        <div class="substep" id="hyper_conf1"></div>
-        <div class="substep" id="hyper_conf2"></div>
-        <div class="substep" id="hyper_conf3"></div>
-        <div class="substep" id="hyper_conf4"></div>
-      </div>
+        <!--<table class="fixed">-->
+          <!--<tr>-->
+            <!--<td style="width:15%;vertical-align:middle;-->
+              <!---webkit-transform: rotate(-90deg);-->
+              <!---moz-transform: rotate(-90deg);" >-->
+              <!--\(-\left\vert E_T^{(n)}\dfrac{2ma_0^{2}}{\hbar^2}\right\vert^{1/8}\)-->
+            <!--</td>-->
+            <!--<td style="width:85%">-->
+              <!--<h3> Efimov spectrum</h3>-->
+              <!--<div id="animated_graph" style="width:800px;height:450px">-->
+              <!--</div>-->
+            <!--</td>-->
+          <!--</tr>-->
+          <!--<tr>-->
+            <!--<td style="width:15%"></td>-->
+            <!--<td style="width:85%;text-align:center">\(\textrm{sign}(a)\times\left\vert\dfrac{a_0^2}{a^2}\right\vert^{1/8}\)</td>-->
+          <!--</tr>-->
+        <!--</table>-->
+        <!--<div class="substep" id="morf_graph"></div>-->
+      <!--</div>-->
       <!--------------------------------------------------
       Overview slide
       -------------------------------------------------->
-      <div id="overvies" class="step" data-x="600" data-y="0"
+      <div id="overview" class="step" data-x="600" data-y="0"
         data-scale="3" style="width:10px;height:10px;">
       </div>
       <!--------------------------------------------------
@@ -173,6 +162,13 @@
           api.next();
         }
       },false);
+
+      document.addEventListener("keydown", function(event){
+        // Go to the overview slide when pressing the escape key
+        if(event.keyCode === 27 /* value of esc*/){
+          api.goto("overview")
+        }
+      });
     </script>
   </body>
 </html>
