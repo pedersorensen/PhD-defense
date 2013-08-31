@@ -125,17 +125,17 @@ $(document).ready(function(){
         animate_text(rho_old,rho, text_rho,0, radius);
         animate_text(alpha_old,alpha, text_alpha,3, Math.PI);
     }
-    $("#hyper_conf1").on( "impress:substep-exit",
-            function(){ animate(200, Math.PI/4, alphax, alphay);})
-    $("#hyper_conf1").on( "impress:substep-enter",
-            function(){ animate(2*radius, Math.PI/4, alphax, alphay);})
-    $("#hyper_conf2").on( "impress:substep-enter",
-            function(){ animate(400, Math.PI/4, alphax, alphay);})
+    $("#hyper_conf1").on("impress:substep-exit",
+            function(){animate(200, Math.PI/4, alphax, alphay);})
+    $("#hyper_conf1").on("impress:substep-enter",
+            function(){animate(2*radius, Math.PI/4, alphax, alphay);})
+    $("#hyper_conf2").on("impress:substep-enter",
+            function(){animate(400, Math.PI/4, alphax, alphay);})
     var alp = Math.sqrt(0.5)*Math.atan(2*radius/Math.sqrt(325*325-4*radius*radius))
-    $("#hyper_conf3").on( "impress:substep-enter",
-            function(){ animate(325, alp, alphax, alphay);})
-    $("#hyper_conf4").on( "impress:substep-enter",
-            function(){ animate(rho, Math.PI/2, alphax, alphay);})
+    $("#hyper_conf3").on("impress:substep-enter",
+            function(){animate(325, alp, alphax, alphay);})
+    $("#hyper_conf4").on("impress:substep-enter",
+            function(){animate(rho, Math.PI/2, alphax, alphay);})
 
 });
 

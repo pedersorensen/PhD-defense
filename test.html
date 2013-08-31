@@ -69,71 +69,95 @@
       <!--------------------------------------------------
       Mass-imbalanced systems
       -------------------------------------------------->
-      <div id="mass_imbalanced_slide" class="step slide"
-        data-x="1200" data-y="0">
-        <!--[>Load the script describing the figure<]-->
-        <script type="text/javascript" src="figures/mass_imbalanced.js">
-        </script>
-        <h2>Mass-imbalanced systems</h2>
-        <br>
-        <table>
-          <tr>
-            <td style="width:35%">
-              <div id="mass_imbalanced" style="width:250px;height:200px;">
-              </div>
-            <div class="substep" id="decrease_ball"></div>
-            </td>
-            <td style="width:65%;text-align:left;vertical-align:top">
-              <ul>
-                <li class="substep">
-                  For instance the system of &nbsp;
-                  <sup>133</sup>Cs &ndash; <sup>7</sup>Li
-                </li>
-                <li class="substep">
-                  Mass ratio of ~19 fairly large
-                </li>
-                <li class="substep">
-                  Scaling ratio reduced down to ~4.8
-                </li>
-              </ul>
-            </td>
-          </tr>
-        </table>
-        <div class="substep">
-          This leads to almost twice as many interference features in any
-          given scattering length range for for the equal mass system
-        </div>
-      </div>
-      <!--------------------------------------------------
-      Efimov spectrum animated
-      -------------------------------------------------->
-      <!--<div id="efimov_spectrum_animated_slide" class="step slide"-->
-        <!--data-x="2400" data-y="0" style="padding:90px 20px">-->
-        <!--[>Load the script describing the figure<]-->
-        <!--<script type="text/javascript"-->
-          <!--src="figures/efimov_spectrum_animated.js">-->
+      <!--<div id="mass_imbalanced_slide" class="step slide"-->
+        <!--data-x="1200" data-y="0">-->
+        <!--[>[>Load the script describing the figure<]<]-->
+        <!--<script type="text/javascript" src="figures/mass_imbalanced.js">-->
         <!--</script>-->
-
-        <!--<table class="fixed">-->
+        <!--<h2>Mass-imbalanced systems</h2>-->
+        <!--<br>-->
+        <!--<table>-->
           <!--<tr>-->
-            <!--<td style="width:15%;vertical-align:middle;-->
-              <!---webkit-transform: rotate(-90deg);-->
-              <!---moz-transform: rotate(-90deg);" >-->
-              <!--\(-\left\vert E_T^{(n)}\dfrac{2ma_0^{2}}{\hbar^2}\right\vert^{1/8}\)-->
-            <!--</td>-->
-            <!--<td style="width:85%">-->
-              <!--<h3> Efimov spectrum</h3>-->
-              <!--<div id="animated_graph" style="width:800px;height:450px">-->
+            <!--<td style="width:35%">-->
+              <!--<div id="mass_imbalanced" style="width:250px;height:200px;">-->
               <!--</div>-->
+            <!--<div class="substep" id="decrease_ball"></div>-->
             <!--</td>-->
-          <!--</tr>-->
-          <!--<tr>-->
-            <!--<td style="width:15%"></td>-->
-            <!--<td style="width:85%;text-align:center">\(\textrm{sign}(a)\times\left\vert\dfrac{a_0^2}{a^2}\right\vert^{1/8}\)</td>-->
+            <!--<td style="width:65%;text-align:left;vertical-align:top">-->
+              <!--<ul>-->
+                <!--<li class="substep">-->
+                  <!--For instance the system of &nbsp;-->
+                  <!--<sup>133</sup>Cs &ndash; <sup>7</sup>Li-->
+                <!--</li>-->
+                <!--<li class="substep">-->
+                  <!--Mass ratio of ~19 fairly large-->
+                <!--</li>-->
+                <!--<li class="substep">-->
+                  <!--Scaling ratio reduced down to ~4.8-->
+                <!--</li>-->
+              <!--</ul>-->
+            <!--</td>-->
           <!--</tr>-->
         <!--</table>-->
-        <!--<div class="substep" id="morf_graph"></div>-->
+        <!--<div class="substep">-->
+          <!--This leads to almost twice as many interference features in any-->
+          <!--given scattering length range for for the equal mass system-->
+        <!--</div>-->
       <!--</div>-->
+      <!--------------------------------------------------
+      Introduction
+      -------------------------------------------------->
+      <!--<div id="intro_slide" class="step slide" data-x="1200" data-y="0">-->
+        <!--<h2>Introduction</h2>-->
+        <!--<table>-->
+          <!--<tr>-->
+            <!--<td>-->
+              <!--<p>Vitaly Efimov</p>-->
+              <!--<img src="images/vitaly_efimov.jpg" style="width:250px;">-->
+            <!--</td>-->
+          <!--</tr>-->
+        <!--</table>-->
+      <!--</div>-->
+      <!--------------------------------------------------
+      Recombination for mass imbalanced systems incl. temperature effects
+      -------------------------------------------------->
+      <div id="mass_imbalanced_slide2" class="step slide"
+        data-x="1200" data-y="0" style="padding:90px 20px">
+
+        <!--Load the script describing the figure-->
+        <script type="text/javascript"
+          src="figures/mass_imbalanced_rate2.js">
+        </script>
+
+        <table class="fixed">
+          <tr>
+            <td style="width:10%;vertical-align:middle;
+              -webkit-transform: rotate(-90deg);
+              -moz-transform: rotate(-90deg);">
+              <!--\(\alpha_\text{rec}[\text{cm}^6/\text{s}]\)-->
+              &alpha;<sub>rec</sub>&nbsp;[cm<sup>6</sup>/s]
+            </td>
+            <td style="width:90%">
+              <h3>Mass imbalanced recombination rate</h3>
+              <div id="mass_imbalanced_rate"
+                style="width:800px;height:450px"></div>
+            </td>
+          </tr>
+          <tr>
+            <td style="width:10%"></td>
+            <!--<td style="width:90%;text-align:center">\(a[a_0]\)</td>-->
+            <td style="width:90%;text-align:center">a[a<sub>0</sub>]</td>
+          </tr>
+        </table>
+        <div class="substep" id="decrease_temp1"></div>
+        <div class="substep" id="decrease_temp2"></div>
+        <div class="substep" id="decrease_temp3"></div>
+        <div class="substep" id="decrease_temp4"></div>
+        <div class="substep" id="decrease_temp5"></div>
+        <div class="substep" id="decrease_temp6"></div>
+        <div class="substep" id="decrease_temp7"></div>
+        <div class="substep" id="decrease_temp8"></div>
+      </div>
       <!--------------------------------------------------
       Overview slide
       -------------------------------------------------->

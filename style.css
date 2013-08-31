@@ -204,9 +204,9 @@ They cover everything what you see on first three steps of the demo.*/
  *  Done with the copy-paste (mostly), lets get jiggy  *
  *******************************************************/
 
-/*****************
- *  Title slide  *
- *****************/
+/************************
+ *  Some generel stuff  *
+ ************************/
 h1 {
     font-size: 40pt;
     text-align: center;
@@ -233,13 +233,37 @@ h4 {
 }
 p{
     font-size:20pt;
+    line-height:20pt;
+}
+sub {
+    vertical-align:text-bottom;
+    font-size:65%;
+    line-height:100%;
+}
+sup {
+    vertical-align:text-top;
+    font-size:65%;
+    line-height:100%;
+}
+/*****************
+ *  Title slide  *
+ *****************/
+#title p{
+    font-size:20pt;
     line-height:25pt;
+}
+/************************
+ *  Introduction slide  *
+ ************************/
+#intro_slide table,
+#intro_slide tr,
+#intro_slide td{
+    border:1px solid black;
 }
 /********************
  *  Table settings  *
  ********************/
 table, th, td{
-    /*border:1px solid black;*/
 }
 table{
     /*width:100%;*/
@@ -357,19 +381,9 @@ td{
     line-height:45pt;
 }
 
-sub {
-    vertical-align:text-bottom;
-    font-size:65%;
-    line-height:100%;
-}
-sup {
-    vertical-align:text-top;
-    font-size:65%;
-    line-height:100%;
-}
-/*********
+/***************************
  *  efimov_spectrum_slide  *
- *********/
+ ***************************/
 table, tr,td{
     /*border:1px solid black;*/
 }

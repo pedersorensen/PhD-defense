@@ -83,7 +83,8 @@ function log10TickGenerator(axis,step) {
 
     do {
         var p = Math.pow(10,min);
-        res.push([s*p, "\\("+pm+"10^{"+min+"}\\)"]);
+        //res.push([s*p, "\\("+pm+"10^{"+min+"}\\)"]);
+        res.push([s*p, "<p>"+pm+"10<sup>"+min+"</sup></p>"])
         min += step;
     } while (min <= max);
     return res;
