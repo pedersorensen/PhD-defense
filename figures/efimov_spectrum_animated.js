@@ -1556,28 +1556,46 @@ $(document).ready(function() {
 
     // Start by plotting all the curves using the single-channel data only
     var line1s = paper.path(path1s).attr(line_attr);
-    var line1d = paper.path(path1s).attr(line_attr);
-    var line1r = paper.path(path1s).attr(line_attr);
     var line2s = paper.path(path2s).attr(line_attr);
-    var line2d = paper.path(path2s).attr(line_attr);
-    var line2r = paper.path(path2s).attr(line_attr);
     var line3s = paper.path(path3s).attr(line_attr);
-    var line3d = paper.path(path3s).attr(line_attr);
-    var line3r = paper.path(path3s).attr(line_attr);
     var line_th = paper.path(path_th).attr(line_attr);
+
+    line_attr.opacity=0;
+    line_attr.stroke="blue";
+    var line1d = paper.path(path1s).attr(line_attr);
+    var line2d = paper.path(path2s).attr(line_attr);
+    var line3d = paper.path(path3s).attr(line_attr);
+
+    line_attr.stroke="#00ff00";
+    var line1r = paper.path(path1s).attr(line_attr);
+    var line2r = paper.path(path2s).attr(line_attr);
+    var line3r = paper.path(path3s).attr(line_attr);
     var line_th_r = paper.path(path_th).attr(line_attr);
 
     $("#morf_efimov_graph").on("impress:substep-enter", function(){
-        line1d.animate({path:path1d,stroke:'blue'}, 1000);
-        line1r.animate({path:path1r,stroke:'#00ff00'}, 1000);
-        line2d.animate({path:path2d,stroke:'blue'}, 1000);
-        line2r.animate({path:path2r,stroke:'#00ff00'}, 1000);
-        line3d.animate({path:path3d,stroke:'blue'}, 1000);
-        line3r.animate({path:path3r,stroke:'#00ff00'}, 1000);
-        line_th_r.animate({path:path_th_r,stroke:'#00ff00'}, 1000);
+        line1d.animate({path:path1d,opacity:1}, 1000);
+        line1r.animate({path:path1r,opacity:1}, 1000);
+        line2d.animate({path:path2d,opacity:1}, 1000);
+        line2r.animate({path:path2r,opacity:1}, 1000);
+        line3d.animate({path:path3d,opacity:1}, 1000);
+        line3r.animate({path:path3r,opacity:1}, 1000);
+        line_th_r.animate({path:path_th_r,opacity:1}, 1000);
         legend2.animate({y:transY(-0.14),opacity:1},1000)
         legend3.animate({y:transY(-0.21),opacity:1},1000)
         legend_rect2.animate({y:transY(-0.125), opacity:1},1000)
         legend_rect3.animate({y:transY(-0.195), opacity:1},1000)
+    });
+    $("#morf_efimov_graph").on("impress:substep-exit", function(){
+        line1d.animate({path:path1s,opacity:0}, 1000);
+        line1r.animate({path:path1s,opacity:0}, 1000);
+        line2d.animate({path:path2s,opacity:0}, 1000);
+        line2r.animate({path:path2s,opacity:0}, 1000);
+        line3d.animate({path:path3s,opacity:0}, 1000);
+        line3r.animate({path:path3s,opacity:0}, 1000);
+        line_th_r.animate({path:path_th,opacity:0}, 1000);
+        legend2.animate({y:transY(-0.07),opacity:0},1000)
+        legend3.animate({y:transY(-0.07),opacity:0},1000)
+        legend_rect2.animate({y:transY(-0.055), opacity:0},1000)
+        legend_rect3.animate({y:transY(-0.055), opacity:0},1000)
     });
 });

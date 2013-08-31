@@ -527,6 +527,7 @@ $(document).ready(function(){
         [{
             //Draw experimental points
             label:"\\(^7\\text{Li}\\)",
+            label:"<p>&nbsp;<sup>7</sup>Li [1]</p>",
             color:"#C080FF",
             data:alpha_rec_li7,
             points:{show:true}
@@ -534,19 +535,21 @@ $(document).ready(function(){
         {
             // The theoretical curve
             label:"\\(\\text{Two-channel}\\)",
+            label:"<p>&nbsp;Two-channel</p>",
             color:"blue",
             data:alpha_two_channel,
         },
         {
             // The overall a^4 trend
             label:"\\(a^4\\)",
+            label:"<p>&nbsp;a<sup>4</sup></p>",
             color:"red",
             data:data2,
         },
-        {
+        {   // Draw the arrows marking a_1^* and a_2^*
             color:"black",
-            data:[[124.8,1e-24],[124.8,1e-26],NaN,
-                  [2674,1e-24],[2674,1e-26]]
+            data:[[124.8,1e-24],[124.8,1e-26],[124.8*.9,1e-26*2],[124.8,1e-26],[124.8/.9,1e-26*2],NaN,
+                  [2674,1e-26],[2674,1e-24],[2674*.9,1e-24/2],[2674,1e-24],[2674/.9,1e-24/2],]
         }
         ],
         options);

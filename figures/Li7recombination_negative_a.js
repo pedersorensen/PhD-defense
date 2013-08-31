@@ -299,6 +299,7 @@ $(document).ready(function(){
         [{
             //Draw experimental points
             label:"\\(^7\\text{Li data}\\)",
+            label:"<p>&nbsp;<sup>7</sup>Li [1]</p>",
             color:"#C080FF",
             data:alpha_rec_li7_neg,
             points:{
@@ -306,34 +307,25 @@ $(document).ready(function(){
             }
         },
         { //0 K
-            label:"\\(0.0\\,\\mu\\text{K}\\)",
+            label:"&nbsp;\\(0.0\\,\\mu\\text{K}\\)",
+            label:"<p>&nbsp;0.0 &mu;K</p>",
             color:col2,
             data:data1, },
         { // 0.5 mu K
-            label:"\\(0.5\\,\\mu\\text{K}\\)",
+            label:"&nbsp;\\(0.5\\,\\mu\\text{K}\\)",
+            label:"<p>&nbsp;0.5 &mu;K</p>",
             color:colorLerp(col1, col2, 2/3),
             data:data2, },
         { // 1.0 mu K
-            label:"\\(1.0\\,\\mu\\text{K}\\)",
+            label:"&nbsp;\\(1.0\\,\\mu\\text{K}\\)",
+            label:"<p>&nbsp;1.0 &mu;K</p>",
             color:colorLerp(col1, col2, 1/3),
             data:data3, },
         { // 2.0 mu K
-            label:"\\(2.0\\,\\mu\\text{K}\\)",
+            label:"&nbsp;\\(2.0\\,\\mu\\text{K}\\)",
+            label:"<p>&nbsp;2.0 &mu;K</p>",
             color:col1,
             data:data4, },
         ],
         options);
-
-
-        //var o = plot.pointOffset({ x: 110, y: 2e-23});
-        //placeholder.append(
-                //"<div style = 'position:absolute;left:" +
-                //o.left + "px;top:" + o.top +
-                //"px;font-size:smaller'>\\(a_1^*\\)</div>");
-        //var o = plot.pointOffset({ x: 2400, y: 1e-26});
-        //placeholder.append(
-                //"<div style = 'position:absolute;left:" +
-                //o.left + "px;top:" + o.top +
-                //"px;font-size:smaller'>\\(a_2^*\\)</div>");
-
 });
