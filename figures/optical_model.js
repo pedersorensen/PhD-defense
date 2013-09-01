@@ -580,9 +580,10 @@ $(document).ready(function(){
         }],
         options);
 
-        var o = plot.pointOffset({ x: 2.7, y: 0.15});
+        var o = plot.pointOffset({ x: 3.2, y: 0.15});
         placeholder.append(
-                "<div style = 'position:absolute;left:" +
-                o.left + "px;top:" + o.top +
-                "px;font-size:smaller'>\\(f(\\rho)=He^{-ik\\rho}+Ge^{ik\\rho}\\)</div>");
+            "<p style = 'position:absolute;left:" +
+            o.left + "px;top:" + o.top +
+            //"px;font-size:smaller'>\\(f(\\rho)=He^{-ik\\rho}+Ge^{ik\\rho}\\)</p>");
+            "px'>f (&rho;) = He<sup>&ndash; i k &rho;</sup> + Ge<sup>i k &rho;</sup></p>");
 });

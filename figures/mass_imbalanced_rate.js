@@ -100,143 +100,150 @@ var CsLirec = [
     [-29836.4724028334,1.382529568780421e-12,8.192140307263431e-24,3.285026848163685e-23,1.31184465453892e-22,5.23053243148212e-22,2.093047277600331e-21,8.402064888993327e-21,3.364497301940285e-20,1.341116372915381e-19,5.348954876241108e-19,2.145612854311548e-18,8.630009755647305e-18,3.45028356963733e-17,1.366239001980923e-16,5.404968583102061e-16,2.173834533582989e-15,9.063787925593548e-15],
     [-31622.77660168379,2.634706645508324e-12,8.192140118352354e-24,3.28501198657802e-23,1.311841618690042e-22,5.23057556212553e-22,2.093067858642151e-21,8.401969837650317e-21,3.364403651692647e-20,1.34112813969528e-19,5.349348261014713e-19,2.14569026966169e-18,8.628538056712351e-18,3.449305320022554e-17,1.366589674520756e-16,5.414311412170118e-16,2.181172406091979e-15,9.089468762672951e-15]
 ]
-$(document).ready(function() {
-    //Create the canvas to draw on
-    var paper = Raphael("mass_imbalanced_rate", 790, 460);
-
-    var xmin = -5, xmax = -2, ymin = -24, ymax = -10;
-    var l = 50, t = 10, r = 775, b = 415;
-    paper.rect(l,t,r-l,b-t).attr({'stroke-width':3});
-
-    var A = (t-b)/(ymax-ymin),
-        B = (b*ymax-t*ymin)/(ymax-ymin)
-        C = (l-r)/(xmin-xmax),
-        D = (r*xmin-l*xmax)/(xmin-xmax);
-
-    function transX(x) {return C*x+D;}
-    function transY(y) {return A*y+B;}
-    function get_plot_path(P){
-        var path = "M"+transX(P[0][0])+","+transY(P[0][1]);
-        for(var i = 1;i<P.length;++i){
-            var xt = transX(P[i][0]);
-            var yt = transY(P[i][1]);
-            path += "L"+xt+","+yt;
+$(document).ready(function(){
+    // Create a data-structure containing all the data from 'CsLirec' in a
+    // format ready for plotting
+    // data[0] will be an array of scattering length values in the first
+    // columns and recombination rate for T = 0 K in the second column.
+    var data = [], d = []
+    for (var i = 0; i < CsLirec.length; i += 1) {
+        var x = CsLirec[i][0];
+        var y = CsLirec[i][1];
+        d.push([x,y]);
+    }
+    data.push(d)
+    // Now append data-series for the finite temperature curves with
+    // increasing temperature
+    for(var j = CsLirec[0].length-1; j>2 ;j -= 2){
+        var d = []
+        for (var i = 0; i < CsLirec.length; i += 1) {
+            var x = CsLirec[i][0];
+            var y = CsLirec[i][j];
+            d.push([x,y]);
         }
-        return path
+        data.push(d)
     }
-    var grid_attr = {'stroke-width':0.3};
-    var text_attr = {"font-size":25, fill:"#555555"};
-    function draw_grid(x_grid,y_grid){
-        // Draw vertical grid lines
-        x_grid.forEach(function(x){
-            var xt = transX(x);
-            var ymin = transY(y_grid[0])
-            var path = "M"+xt+","+ymin;
-            path += "L"+xt+","+transY(y_grid[y_grid.length-1]);
-            paper.path(path).attr(grid_attr);
-            paper.text(xt,ymin+20,x).attr(text_attr)
-        })
-        // Draw horizontal grid lines
-        y_grid.forEach(function(y){
-            var yt = transY(y);
-            var xmin = transX(x_grid[0])
-            var path = "M"+xmin+","+yt;
-            path += "L"+transX(x_grid[x_grid.length-1])+","+yt;
-            paper.path(path).attr(grid_attr);
-            paper.text(xmin-30, yt, y).attr(text_attr)
-        })
-    }
-    // x- and y-values where the grid should be drawn
-    var x_grid = [-5, -4, -3, -2]
-        y_grid = [-24, -22, -20, -18, -16, -14, -12, -10];
-    draw_grid(x_grid, y_grid);
-
+    // Some boilerplate code to setup the logarithmic axes
     var ln10 = Math.log(10);
     // Make logarithmic axis
     function Log10(v) {return Math.log(v)/ln10;}
     // Modified logarithmic axis for negative data values
     // Also reverses the axis direction
     function Log10m(v) {return -Math.log(-v)/ln10;}
-
-    function Transformer(v){
-        // Transformation callback function
-        return [Log10m(v[0]), Log10(v[1])];
+    // Fix the axis and set proper tick marks
+    var options = {
+        xaxis: {
+            min:-0.5e5,
+            max:-1e2,
+            transform: Log10m,
+            ticks:function(v){return log10TickGenerator(v,1);},
+            font:{size:25,color:"#555555"},
+        },
+        yaxis: {
+            min:1e-24,
+            max:1e-11,
+            transform: Log10,
+            ticks:function(v){return log10TickGenerator(v,2);},
+            font:{size:25,color:"#555555"}
+        }
     }
 
-    var data = [];
-    for(var i=0;i<CsLirec.length;++i){
-        var x = CsLirec[i][0]
-        var y = CsLirec[i][1]
-        data.push([x,y])
+    // The T = 0 K curve is plotted in blue (i.e. cold) while the
+    // 'hottest' curve is plotted in red
+    var col1 = "#0000ff"; // Blue
+    var col2 = "#ff0000"; // Red
+    // A list of tempratures
+    var temps = [["0 K"],["5.5 nK"],["22.0 nK"],["87.9 nK"],["0.4 &mu;K"],
+        ["1.4 &mu;K"],["5.6 &mu;K"],["22.5 &mu;K"],["90.0 &mu;K"]]
+    var temps2 = [0,5.5,22.0,87.9,400,1400,5600,22500,90000]
+    // Plot the T = 0 K curve
+    placeholder = $("#mass_imbalanced_rate");
+    var plot_struct = [
+            {
+                color:col1,
+                data:data[0],
+            }
+        ];
+    plot = $.plot(placeholder, plot_struct, options);
+    // Place the label the shows the current temperature. The label gets
+    // the id="T" such that we can later change the text
+    var o = plot.pointOffset({ x: -1000, y: 1e-13});
+    placeholder.append( "<p id = \"T\" style = 'position:absolute;left:"+
+            o.left + "px;top:" + o.top + "px;'>T = " + temps[0] + "</p>");
+
+
+    function decrease_temp(event){
+        //console.log(event.data.val)
+        var next_set = plot_struct.length;
+        // Only push a new dataset if there are datasets left to push
+        if(next_set >= data.length){
+            return
+        }
+        plot_struct.push({});
+        var col_a = colorLerp(col1, col2, (next_set-1)/(data.length-1));
+        var col_b = colorLerp(col1, col2, (next_set)/(data.length-1));
+        // N is the number of substeps taken to perform the animation
+        // The animation take a total of 1000 ms
+        var i = 0, N = 41, animate_time = 1000;
+        var interval = setInterval(function(){
+            // Recreating the temporary array from scratch over and over
+            // is hardly efficient, but it works just fine
+            dat = [];
+            for(var k = 0;k<data[0].length;++k){
+                var x = data[0][k][0];
+                var y1 = data[next_set-1][k][1];
+                var y2 = data[next_set][k][1];
+                // Linearly interpolate between the two dataseries
+                // Note, however, that since the data is plotted on a
+                // logarithmic scale it is better to interpolate the
+                // logarithms of the y-values. The resulting equation from
+                // doing this is the following
+                var y = Math.pow(y2,i/(N-1))*Math.pow(y1,(N-1-i)/(N-1));
+                dat.push([x,y]);
+            }
+            var pl = {
+                color:colorLerp(col_a,col_b,i/(N-1)),
+                data:dat,
+            }
+            plot_struct[next_set] = pl
+            plot.setData(plot_struct)
+            plot.draw()
+            ++i;
+            // Stop the animation
+            if(i === N){
+                clearInterval(interval);
+            }
+        },animate_time/(N-1))
+        //T.innerHTML = "T = " + temps[next_set]
+        animate_text(temps2[next_set-1],temps2[next_set]);
     }
-    data = data.map(Transformer);
-
-
-    var line_attr = {
-        'stroke':'red',
-        'stroke-width':3,
-        'clip-rect': l+ " " + t + " " + (r-l) + " " + (b-t)
+    function animate_text(start, end){
+        var i = 0;
+        var N = 50;
+        var x = start;
+        var s = " nK"
+        var interval = setInterval(function(){
+            if(i<N){
+                ++i;
+                x = (start+(end-start)*i/N);
+                if(x>1000){
+                    x/=1000;
+                    s = " &mu;K"
+                }
+                temp = "T = " + x.toFixed(1) + s
+                T.innerHTML = temp
+            }
+            else{
+                clearInterval(interval)
+            }
+        },20)
     }
-    var path = get_plot_path(data);
-    var line = paper.path(path).attr(line_attr)
-
-    return
-
-    // First get all the plot data ready
-    var path1s = get_plot_path(data1s);
-    var path1d = get_plot_path(data1d);
-    var path1r = get_plot_path(data1r);
-    var path2s = get_plot_path(data2s);
-    var path2d = get_plot_path(data2d);
-    var path2r = get_plot_path(data2r);
-    var path3s = get_plot_path(data3s);
-    var path3d = get_plot_path(data3d);
-    var path3r = get_plot_path(data3r);
-    var path_th = get_plot_path([[0,0],[1,-1]]);
-    var path_th_r = get_plot_path(threshold);
-
-    // Start by plotting all the curves using the single-channel data only
-    var line1s = paper.path(path1s).attr(line_attr);
-    var line2s = paper.path(path2s).attr(line_attr);
-    var line3s = paper.path(path3s).attr(line_attr);
-    var line_th = paper.path(path_th).attr(line_attr);
-
-    line_attr.opacity=0;
-    line_attr.stroke="blue";
-    var line1d = paper.path(path1s).attr(line_attr);
-    var line2d = paper.path(path2s).attr(line_attr);
-    var line3d = paper.path(path3s).attr(line_attr);
-
-    line_attr.stroke="#00ff00";
-    var line1r = paper.path(path1s).attr(line_attr);
-    var line2r = paper.path(path2s).attr(line_attr);
-    var line3r = paper.path(path3s).attr(line_attr);
-    var line_th_r = paper.path(path_th).attr(line_attr);
-
-    $("#morf_efimov_graph").on("impress:substep-enter", function(){
-        line1d.animate({path:path1d,opacity:1}, 1000);
-        line1r.animate({path:path1r,opacity:1}, 1000);
-        line2d.animate({path:path2d,opacity:1}, 1000);
-        line2r.animate({path:path2r,opacity:1}, 1000);
-        line3d.animate({path:path3d,opacity:1}, 1000);
-        line3r.animate({path:path3r,opacity:1}, 1000);
-        line_th_r.animate({path:path_th_r,opacity:1}, 1000);
-        legend2.animate({y:transY(-0.14),opacity:1},1000)
-        legend3.animate({y:transY(-0.21),opacity:1},1000)
-        legend_rect2.animate({y:transY(-0.125), opacity:1},1000)
-        legend_rect3.animate({y:transY(-0.195), opacity:1},1000)
-    });
-    $("#morf_efimov_graph").on("impress:substep-exit", function(){
-        line1d.animate({path:path1s,opacity:0}, 1000);
-        line1r.animate({path:path1s,opacity:0}, 1000);
-        line2d.animate({path:path2s,opacity:0}, 1000);
-        line2r.animate({path:path2s,opacity:0}, 1000);
-        line3d.animate({path:path3s,opacity:0}, 1000);
-        line3r.animate({path:path3s,opacity:0}, 1000);
-        line_th_r.animate({path:path_th,opacity:0}, 1000);
-        legend2.animate({y:transY(-0.07),opacity:0},1000)
-        legend3.animate({y:transY(-0.07),opacity:0},1000)
-        legend_rect2.animate({y:transY(-0.055), opacity:0},1000)
-        legend_rect3.animate({y:transY(-0.055), opacity:0},1000)
-    });
+    $("#decrease_temp1").on("impress:substep-enter",{val:1},decrease_temp);
+    $("#decrease_temp2").on("impress:substep-enter",{val:2},decrease_temp);
+    $("#decrease_temp3").on("impress:substep-enter",{val:3},decrease_temp);
+    $("#decrease_temp4").on("impress:substep-enter",{val:4},decrease_temp);
+    $("#decrease_temp5").on("impress:substep-enter",{val:5},decrease_temp);
+    $("#decrease_temp6").on("impress:substep-enter",{val:6},decrease_temp);
+    $("#decrease_temp7").on("impress:substep-enter",{val:7},decrease_temp);
+    $("#decrease_temp8").on("impress:substep-enter",{val:8},decrease_temp);
 });
