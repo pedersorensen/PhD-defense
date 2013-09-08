@@ -1,3 +1,4 @@
+$(document).ready(function(){
 var CsLirec = [
     [-100,7.29193599939357e-23,6.91951015100255e-24,1.998567372732262e-23,4.206237041701981e-23,6.168524460215877e-23,7.13632052621589e-23,7.446657208590885e-23,7.504884671802936e-23,7.583915397208531e-23,7.376846665968829e-23,8.704926095981823e-23,NaN,NaN,NaN,NaN,NaN,NaN],
     [-105.9869818882502,7.674814742153523e-23,6.921293405227871e-24,2.042917283917076e-23,4.422064133458575e-23,6.571540797645955e-23,7.584582015416576e-23,7.885818150322087e-23,7.920556047748184e-23,7.987234955045999e-23,7.679490026020937e-23,8.787480887892981e-23,NaN,NaN,NaN,NaN,NaN,NaN],
@@ -100,7 +101,6 @@ var CsLirec = [
     [-29836.4724028334,1.382529568780421e-12,8.192140307263431e-24,3.285026848163685e-23,1.31184465453892e-22,5.23053243148212e-22,2.093047277600331e-21,8.402064888993327e-21,3.364497301940285e-20,1.341116372915381e-19,5.348954876241108e-19,2.145612854311548e-18,8.630009755647305e-18,3.45028356963733e-17,1.366239001980923e-16,5.404968583102061e-16,2.173834533582989e-15,9.063787925593548e-15],
     [-31622.77660168379,2.634706645508324e-12,8.192140118352354e-24,3.28501198657802e-23,1.311841618690042e-22,5.23057556212553e-22,2.093067858642151e-21,8.401969837650317e-21,3.364403651692647e-20,1.34112813969528e-19,5.349348261014713e-19,2.14569026966169e-18,8.628538056712351e-18,3.449305320022554e-17,1.366589674520756e-16,5.414311412170118e-16,2.181172406091979e-15,9.089468762672951e-15]
 ]
-$(document).ready(function(){
     // Create a data-structure containing all the data from 'CsLirec' in a
     // format ready for plotting
     // data[0] will be an array of scattering length values in the first
@@ -157,20 +157,19 @@ $(document).ready(function(){
         ["1.4 &mu;K"],["5.6 &mu;K"],["22.5 &mu;K"],["90.0 &mu;K"]]
     var temps2 = [0,5.5,22.0,87.9,400,1400,5600,22500,90000]
     // Plot the T = 0 K curve
-    placeholder = $("#mass_imbalanced_rate");
+    var placeholder = $("#mass_imbalanced_rate");
     var plot_struct = [
             {
                 color:col1,
                 data:data[0],
             }
         ];
-    plot = $.plot(placeholder, plot_struct, options);
+    var plot = $.plot(placeholder, plot_struct, options);
     // Place the label the shows the current temperature. The label gets
     // the id="T" such that we can later change the text
-    var o = plot.pointOffset({ x: -1000, y: 1e-13});
-    placeholder.append( "<p id = \"T\" style = 'position:absolute;left:"+
-            o.left + "px;top:" + o.top + "px;'>T = " + temps[0] + "</p>");
-
+    var o = plot.pointOffset({ x: -600, y: 3e-14});
+    placeholder.append( "<p id='TT' style='position:absolute;left:"+
+            o.left + "px;top:" + o.top + "px;font-size:30pt;'>T = " + temps[0] + "</p>");
 
     function decrease_temp(event){
         //console.log(event.data.val)
@@ -190,7 +189,7 @@ $(document).ready(function(){
             // is hardly efficient, but it works just fine
             dat = [];
             for(var k = 0;k<data[0].length;++k){
-                var x = data[0][k][0];
+                var x  = data[0][k][0];
                 var y1 = data[next_set-1][k][1];
                 var y2 = data[next_set][k][1];
                 // Linearly interpolate between the two dataseries
@@ -214,7 +213,6 @@ $(document).ready(function(){
                 clearInterval(interval);
             }
         },animate_time/(N-1))
-        //T.innerHTML = "T = " + temps[next_set]
         animate_text(temps2[next_set-1],temps2[next_set]);
     }
     function animate_text(start, end){
@@ -231,7 +229,7 @@ $(document).ready(function(){
                     s = " &mu;K"
                 }
                 temp = "T = " + x.toFixed(1) + s
-                T.innerHTML = temp
+                TT.innerHTML = temp
             }
             else{
                 clearInterval(interval)

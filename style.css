@@ -245,21 +245,6 @@ sup {
     font-size:65%;
     line-height:100%;
 }
-/*****************
- *  Title slide  *
- *****************/
-#title p{
-    font-size:20pt;
-    line-height:25pt;
-}
-/************************
- *  Introduction slide  *
- ************************/
-#intro_slide table,
-#intro_slide tr,
-#intro_slide td{
-    border:1px solid black;
-}
 /********************
  *  Table settings  *
  ********************/
@@ -273,7 +258,52 @@ td{
     /*vertical-align:middle;*/
     /*height:80px;*/
 }
-
+/*****************
+ *  Title slide  *
+ *****************/
+#title p{
+    font-size:20pt;
+    line-height:22pt;
+}
+/************************
+ *  Introduction slide  *
+ ************************/
+#intro_slide table,
+#intro_slide tr,
+#intro_slide td,
+#intro_slide th
+{
+    /*border:1px solid black;*/
+}
+.th{
+    font-size:23pt;
+    line-height:25pt;
+    font-weight:bold;
+    text-align:center;
+}
+#vitaly{
+    width:250px;
+    border-radius:10px;
+    overflow: hidden;
+    box-shadow:5px 5px 5px rgba(0,0,255,0.3);
+    /*-webkit-transform: rotate(2deg);*/
+}
+#intro_slide .substep.past {
+    opacity: 0.6;
+}
+/*****************************
+ *  Zero-range models slide  *
+ *****************************/
+#zero_range_models_slide .substep.past{
+    opacity:1;
+}
+/**************************************
+ *  Hyperspherical coordinates slide  *
+ **************************************/
+#hyper_coords_slide p{
+    font-size:25pt;
+    line-height:25pt;
+}
 /*******************
  *  outline slide  *
  *******************/
@@ -391,7 +421,7 @@ table, tr,td{
 /**************************************************
  *  The overview slide with the thank you notice  *
  **************************************************/
-#thank_you{
+#overview{
     display: block;
 
     width: 600px;

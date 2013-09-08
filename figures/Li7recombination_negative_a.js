@@ -1,3 +1,4 @@
+$(document).ready(function(){
 var alpha_rec_li7_neg = [
     [-28799.91208428001,1.453937305632658e-19],
     [-21592.79811481792,1.688583983661812e-19],
@@ -248,32 +249,35 @@ var li7_thermal = [
     [-31622.77660168379,4.659487320072236e-16,2.464593321335671e-19,6.952742656162945e-20,1.865452916402279e-20]
 ];
 
-$(document).ready(function(){
-    var data1 = [];
-    var data2 = [];
-    var data3 = [];
-    var data4 = [];
-    for (var i = 0; i < li7_thermal.length; i += 1) {
-        var x  = li7_thermal[i][0];
-        var y1 = li7_thermal[i][1];
-        var y2 = li7_thermal[i][2];
-        var y3 = li7_thermal[i][3];
-        var y4 = li7_thermal[i][4];
-        data1.push([x,y1]);
-        data2.push([x,y2]);
-        data3.push([x,y3]);
-        data4.push([x,y4]);
+    // Create a data-structure containing all the data from 'CsLirec' in a
+    // format ready for plotting
+    // data[0] will be an array of scattering length values in the first
+    // columns and recombination rate for T = 0 K in the second column.
+    var data = [];
+    // Now append data-series for the finite temperature curves with
+    // increasing temperature
+    for(var j = 1; j < li7_thermal[0].length; ++j){
+        var d = []
+        for (var i = 0; i < li7_thermal.length; ++i) {
+            var x = li7_thermal[i][0];
+            var y = li7_thermal[i][j];
+            d.push([x,y]);
+        }
+        data.push(d)
     }
-
+    // Some boilerplate code to setup the logarithmic axes
     var ln10 = Math.log(10);
     // Make logarithmic axis
     function Log10(v) {return Math.log(v)/ln10;}
     // Modified logarithmic axis for negative data values
     // Also reverses the axis direction
     function Log10m(v) {return -Math.log(-v)/ln10;}
-
+    // Fix the axis and set proper tick marks
     var options = {
-        legend:{position:"ne",margin:20,backgroundOpacity:0},
+        legend:{
+            backgroundOpacity:0,
+            margin:10,
+        },
         xaxis: {
             min:-5e4,
             max:-2e1,
@@ -290,42 +294,92 @@ $(document).ready(function(){
         }
     }
 
-    var col1 = "#ff0000";
-    var col2 = "#0000ff";
-    var coli = colorLerp(col1,col2,2/3);
-
-    var placeholder = $("#fig3");
-    var plot = $.plot(placeholder,
-        [{
-            //Draw experimental points
-            label:"\\(^7\\text{Li data}\\)",
-            label:"<p>&nbsp;<sup>7</sup>Li [1]</p>",
-            color:"#C080FF",
-            data:alpha_rec_li7_neg,
-            points:{
-                show:true,
+    // The T = 0 K curve is plotted in blue (i.e. cold) while the
+    // 'hottest' curve is plotted in red
+    var col1 = "#0000ff"; // Blue
+    var col2 = "#ff0000"; // Red
+    // A list of tempratures
+    var temps = [["0.0 &mu;K"],["0.5 &mu;K"],["1.0 &mu;K"],["2.0 &mu;K"]]
+    var temps2 = [0,0.5,1.0,2]
+    // Plot the T = 0 K curve
+    var placeholder = $("#negativeLi7");
+    var long_space = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+    var plot_struct = [
+            {
+                //Draw experimental points
+                label:"\\(^7\\text{Li data}\\)",
+                label:"<p>&nbsp;<sup>7</sup>Li [1] @ 1.5 &mu;K</p>",
+                color:"#C080FF",
+                data:alpha_rec_li7_neg,
+                points:{
+                    show:true,
+                }
+            },
+            {
+                color:col1,
+                label:"<p>" + long_space + "T = 0.0 &mu;K</p>",
+                data:data[0],
             }
-        },
-        { //0 K
-            label:"&nbsp;\\(0.0\\,\\mu\\text{K}\\)",
-            label:"<p>&nbsp;0.0 &mu;K</p>",
-            color:col2,
-            data:data1, },
-        { // 0.5 mu K
-            label:"&nbsp;\\(0.5\\,\\mu\\text{K}\\)",
-            label:"<p>&nbsp;0.5 &mu;K</p>",
-            color:colorLerp(col1, col2, 2/3),
-            data:data2, },
-        { // 1.0 mu K
-            label:"&nbsp;\\(1.0\\,\\mu\\text{K}\\)",
-            label:"<p>&nbsp;1.0 &mu;K</p>",
-            color:colorLerp(col1, col2, 1/3),
-            data:data3, },
-        { // 2.0 mu K
-            label:"&nbsp;\\(2.0\\,\\mu\\text{K}\\)",
-            label:"<p>&nbsp;2.0 &mu;K</p>",
-            color:col1,
-            data:data4, },
-        ],
-        options);
+        ];
+    $.plot(placeholder, plot_struct, options);
+
+    function decrease_tempLi7(){
+        plot_struct.push({});
+        plot_struct.push({});
+        plot_struct.push({});
+        var col_a = colorLerp(col1, col2, (1)/(data.length-1));
+        var col_b = colorLerp(col1, col2, (2)/(data.length-1));
+        var col_c = colorLerp(col1, col2, (3)/(data.length-1));
+        // N is the number of substeps taken to perform the animation
+        // The animation take a total of 1000 ms
+        var i = 0, N = 41, animate_time = 1000;
+        var interval = setInterval(function(){
+            // Recreating the temporary array from scratch over and over
+            // is hardly efficient, but it works just fine
+            var dat1 = [], dat2 = [], dat3 = [];
+            for(var k = 0;k<data[0].length;++k){
+                var x  = data[0][k][0];
+                var y0 = data[0][k][1];
+                var y1 = data[1][k][1];
+                var y2 = data[2][k][1];
+                var y3 = data[3][k][1];
+                // Linearly interpolate between the two dataseries
+                // Note, however, that since the data is plotted on a
+                // logarithmic scale it is better to interpolate the
+                // logarithms of the y-values.
+                var yf = Math.pow(y0,(N-1-i)/(N-1))
+                y1 = Math.pow(y1,i/(N-1))*yf;
+                y2 = Math.pow(y2,i/(N-1))*yf;
+                y3 = Math.pow(y3,i/(N-1))*yf;
+                dat1.push([x,y1]);
+                dat2.push([x,y2]);
+                dat3.push([x,y3]);
+            }
+            var pl1 = {
+                color:colorLerp(col1,col_a,i/(N-1)),
+                label:"<p>" + long_space + "T = " + temps[1] + "</p>",
+                data:dat1,
+            }
+            var pl2 = {
+                color:colorLerp(col1,col_b,i/(N-1)),
+                label:"<p>" + long_space + "T = " + temps[2] + "</p>",
+                data:dat2,
+            }
+            var pl3 = {
+                color:colorLerp(col1,col_c,i/(N-1)),
+                label:"<p>" + long_space + "T = " + temps[3] + "</p>",
+                data:dat3,
+            }
+            plot_struct[2] = pl1
+            plot_struct[3] = pl2
+            plot_struct[4] = pl3
+            $.plot(placeholder, plot_struct, options);
+            ++i;
+            // Stop the animation
+            if(i === N){
+                clearInterval(interval);
+            }
+        },animate_time/(N-1))
+    }
+    $("#decrease_temp1Li7").on("impress:substep-enter",decrease_tempLi7);
 });

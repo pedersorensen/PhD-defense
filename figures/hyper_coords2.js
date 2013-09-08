@@ -83,6 +83,8 @@ $(document).ready(function(){
     var text_rho = paper.text(50,70," = " +(rho/radius).toFixed(0));
     text_alpha.attr(text_attr);
     text_rho.attr(text_attr);
+    //var text_alpha = $("#alpha_i")
+    //var text_rho = $("#rho")
     function animate_circles(alpha, alphax, alphay, rho){
         var xy123 = getCartesian(alpha, alphax, alphay, rho, x0, y0),
             dx1 = xy123[0]-x1,
@@ -136,7 +138,6 @@ $(document).ready(function(){
             function(){animate(325, alp, alphax, alphay);})
     $("#hyper_conf4").on("impress:substep-enter",
             function(){animate(rho, Math.PI/2, alphax, alphay);})
-
 });
 
 

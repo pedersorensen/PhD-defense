@@ -1,8 +1,6 @@
 window.onload = function()
 {
-    var canvas = document.getElementById('hyper_coords');
     var DX = 75, DY = 205;
-
     function moveId(elementId, x, y) {
         //Move an element given by it elementId to position (x,y) relative
         //to the top left corner of the canvas
@@ -29,7 +27,7 @@ window.onload = function()
         return line
     }
     //Create the canvas to draw on
-    var paper = Raphael(canvas, 800,300);
+    var paper = Raphael('hyper_coords', 800,300);
 
     //Practical coordinates and a radius
     var x1 = 100, y1 = 100,
@@ -73,8 +71,10 @@ window.onload = function()
     st.attr({"fill":"r(0.30,0.30)white-purple:60-purple"});
 
     // Now everything is translated to the right
-    var DX2 = 400;
-    x1 += DX2; x2 += DX2; x3 += DX2;
+    var jacobi_shift = 400;
+    x1 += jacobi_shift;
+    x2 += jacobi_shift;
+    x3 += jacobi_shift;
     //Midpoint between particle 2 and 3
     var xm = (x2+x3)/2, ym = (y2+y3)/2;
 
@@ -113,7 +113,7 @@ window.onload = function()
         arr1.animate({opacity:1},1000,'linear');
         arr2.animate({opacity:1},1000,'linear');
     }
-    function show_labels2(dx){
+    function show_labels2(){
         $("#x_1").animate({opacity:0},1000,'linear');
         $("#y_1").animate({opacity:0},1000,'linear');
         arr1.animate({opacity:0},1000,'linear');
@@ -123,7 +123,7 @@ window.onload = function()
         arr3.animate({opacity:1},1000,'linear');
         arr4.animate({opacity:1},1000,'linear');
     }
-    function show_labels3(dx){
+    function show_labels3(){
         $("#x_2").animate({opacity:0},1000,'linear');
         $("#y_2").animate({opacity:0},1000,'linear');
         arr3.animate({opacity:0},1000,'linear');
@@ -133,16 +133,10 @@ window.onload = function()
         arr5.animate({opacity:1},1000,'linear');
         arr6.animate({opacity:1},1000,'linear');
     }
-    var show_jacobi1 = document.getElementById("show_jacobi1");
-    show_jacobi1.addEventListener("impress:substep-enter", function(){
-        animate_jacobi(DX2);
-    });
-    var show_jacobi2 = document.getElementById("show_jacobi2");
-    show_jacobi2.addEventListener("impress:substep-enter", function(){
-        show_labels2();
-    });
-    var show_jacobi3 = document.getElementById("show_jacobi3");
-    show_jacobi3.addEventListener("impress:substep-enter", function(){
-        show_labels3();
-    });
+    $("#show_jacobi1").on("impress:substep-enter", function(){
+        var t1 = "t"+jacobi_shift+","+0;
+        st.animate({transform:t1},1000,show_labels1);
+    })
+    $("#show_jacobi2").on("impress:substep-enter", show_labels2);
+    $("#show_jacobi3").on("impress:substep-enter", show_labels3);
 }
