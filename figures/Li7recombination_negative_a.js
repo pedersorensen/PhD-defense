@@ -145,7 +145,6 @@ var alpha_rec_li7_neg = [
     [-49.84135824928673,1.261952582139237e-25],
     [-47.63116797312022,2.558181057455105e-25]
 ];
-
 var li7_thermal = [
     [-50.11872336272722,2.906541156881373e-27,3.147962904027268e-27,3.152671775554408e-27,3.154270222031342e-27],
     [-53.49126004338568,3.748647510350871e-27,4.064371399660042e-27,4.066487141380134e-27,4.067780249487945e-27],
@@ -319,11 +318,36 @@ var li7_thermal = [
                 color:col1,
                 label:"<p>" + long_space + "T = 0.0 &mu;K</p>",
                 data:data[0],
-            }
+            },
         ];
     $.plot(placeholder, plot_struct, options);
 
-    function decrease_tempLi7(){
+    function show_temp(){
+        var pl1 = {
+            color:colorLerp(col1, col2, 1/(data.length-1)),
+            label:"<p>" + long_space + "T = " + temps[1] + "</p>",
+            data:data[1],
+        }
+        var pl2 = {
+            color:colorLerp(col1, col2, 2/(data.length-1)),
+            label:"<p>" + long_space + "T = " + temps[2] + "</p>",
+            data:data[2],
+        }
+        var pl3 = {
+            color:colorLerp(col1, col2, 3/(data.length-1)),
+            label:"<p>" + long_space + "T = " + temps[3] + "</p>",
+            data:data[3],
+        }
+        plot_struct.push(pl1);
+        plot_struct.push(pl2);
+        plot_struct.push(pl3);
+        $.plot(placeholder, plot_struct, options);
+        // Using these setData() and draw() methods does not update the
+        // legend, hence draw the plot anew instead
+        //plat.setData(plot_struct)
+        //plat.draw()
+    }
+    function decrease_tempLi7_2(){
         plot_struct.push({});
         plot_struct.push({});
         plot_struct.push({});
@@ -381,5 +405,5 @@ var li7_thermal = [
             }
         },animate_time/(N-1))
     }
-    $("#decrease_temp1Li7").on("impress:substep-enter",decrease_tempLi7);
+    $("#show_temp").on("impress:substep-enter",show_temp);
 });

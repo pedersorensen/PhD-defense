@@ -268,38 +268,47 @@
         </p>
       </div>
       <!--------------------------------------------------
-      Optical potential model
+      Bound states
       -------------------------------------------------->
-      <div id="optical_model_slide" class="step slide"
-        data-x="3600" data-y="0" style="padding:70px 20px">
+      <div id="bound_states_slide" class="step slide"
+        data-x="3600" data-y="0">
+        <h2>Bound states</h2>
+      </div>
+      <!--------------------------------------------------
+      Efimov spectrum
+      -------------------------------------------------->
+      <div id="efimov_spectrum_slide" class="step slide"
+        data-x="4800" data-y="0" style="padding:90px 20px">
 
         <!--Load the script describing the figure-->
-        <script type="text/javascript" src="figures/optical_model.js">
+        <script type="text/javascript"
+          src="figures/efimov_spectrum_animated.js">
         </script>
 
-        <!--Arranging items is best done via tables-->
         <table class="fixed">
           <tr>
-            <td style="width:13%;vertical-align:middle;" >
-              \(\dfrac{\nu_1^2-\frac{1}{4}}{2(\rho/a)^2}\)
+            <td style="width:15%;vertical-align:middle;
+              -webkit-transform: rotate(-90deg);
+              -moz-transform: rotate(-90deg);" >
+              \(-\left\vert E_T^{(n)}\dfrac{2ma_0^{2}}{\hbar^2}\right\vert^{1/8}\)
             </td>
-            <td style="width:87%">
-              <h3>Optical potential model</h3>
-              <div id="optical_model"
-                style="width:800px;height:450px"></div>
+            <td style="width:85%">
+              <h3> Efimov spectrum</h3>
+              <div id="animated_graph" style="width:800px;height:450px">
+              </div>
             </td>
           </tr>
           <tr>
-            <td style="width:13%"></td>
-            <!--<td style="width:87%;text-align:center">\(\rho/|a|\)</td>-->
-            <td style="width:87%;text-align:center">&rho; /|a|</td>
+            <td style="width:15%"></td>
+            <td style="width:85%;text-align:center">\(\textrm{sign}(a)\times\left\vert\dfrac{a_0^2}{a^2}\right\vert^{1/8}\)</td>
           </tr>
         </table>
+        <div class="substep" id="morf_efimov_graph"></div>
       </div>
       <!--------------------------------------------------
       Three-body recombination rate for Li-7 for positive a
       -------------------------------------------------->
-      <div id="fig2slide" class="step slide" data-x="4800" data-y="0"
+      <div id="fig2slide" class="step slide" data-x="4800" data-y="800"
         style="padding:90px 20px">
 
         <!--Load the script describing the figure-->
@@ -334,46 +343,65 @@
         </table>
       </div>
       <!--------------------------------------------------
-      Three-body recombination rate for Li-7 for negative a
+      Finite temperature effects
       -------------------------------------------------->
-      <!--<div id="fig3slide" class="step slide" data-x="4800" data-y="800"-->
-        <!--style="padding:90px 20px" data-rotate="0">-->
+      <div id="finite_temperature" class="step slide"
+        data-x="4800" data-y="1600">
+        <h2>Finite temperature effects</h2>
+        <h2 style="color:red">Remove this slide</h2>
+        <ul>
+          <li class="substep">
+            Experimental performed at fixed temperature, not
+            fixed energy.
+          </li>
+          <li class="substep" id="average_equation">
+            Perform thermal average
+            \[
+              \langle\alpha_\text{rec}(a)\rangle_T= \frac{1}{2(k_BT)^3}
+              \int E^2e^{-E/k_BT}\alpha_\text{rec}(a,E)\;dE
+            \]
+          </li>
+        </ul>
+        <div>
+          <img class="substep" src="images/tree.jpg"
+            style="height:250px;float:left;">
+          <img class="substep" src="images/bird.jpg"
+            style="height:250px;float:left;">
+        </div>
+      </div>
+      <!--------------------------------------------------
+      Optical potential model
+      -------------------------------------------------->
+      <div id="optical_model_slide" class="step slide"
+        data-x="3600" data-y="1600" style="padding:70px 20px">
 
-        <!--[>Load the script describing the figure<]-->
-        <!--<script type="text/javascript"-->
-          <!--src="figures/Li7recombination_negative_a.js"></script>-->
+        <!--Load the script describing the figure-->
+        <script type="text/javascript" src="figures/optical_model.js">
+        </script>
 
-        <!--[>Arranging items is best done via tables<]-->
-        <!--<table class="fixed">-->
-          <!--<tr>-->
-            <!--<td style="width:10%;vertical-align:middle;-->
-              <!---webkit-transform: rotate(-90deg);-->
-              <!---moz-transform: rotate(-90deg);">-->
-              <!--[>\(\alpha_\text{rec}[\text{cm}^6/\text{s}]\)<]-->
-              <!--&alpha;<sub>rec</sub>&nbsp;[cm<sup>6</sup>/s]-->
-            <!--</td>-->
-            <!--<td style="width:90%">-->
-              <!--<h3> Finite temperature effects</h3>-->
-              <!--<div id="fig3" style="width:800px;height:450px"></div>-->
-            <!--</td>-->
-          <!--</tr>-->
-          <!--<tr>-->
-            <!--<td style="width:10%"></td>-->
-            <!--[><td style="width:90%;text-align:center">\(a[a_0]\)</td><]-->
-            <!--<td style="width:90%;text-align:center">a[a<sub>0</sub>]</td>-->
-          <!--</tr>-->
-          <!--<tr>-->
-            <!--<td style="width:10%"></td>-->
-            <!--<td style="width:90%;text-align:left;font-size:17pt;">-->
-              <!--[1] Pollack et. al. arXiv:1302.0281v2-->
-            <!--</td>-->
-          <!--</tr>-->
-        <!--</table>-->
-      <!--</div>-->
+        <!--Arranging items is best done via tables-->
+        <table class="fixed">
+          <tr>
+            <td style="width:13%;vertical-align:middle;" >
+              \(\dfrac{\nu_1^2-\frac{1}{4}}{2(\rho/a)^2}\)
+            </td>
+            <td style="width:87%">
+              <h3>Optical potential model</h3>
+              <div id="optical_model"
+                style="width:800px;height:450px"></div>
+            </td>
+          </tr>
+          <tr>
+            <td style="width:13%"></td>
+            <!--<td style="width:87%;text-align:center">\(\rho/|a|\)</td>-->
+            <td style="width:87%;text-align:center">&rho; /|a|</td>
+          </tr>
+        </table>
+      </div>
       <!--------------------------------------------------
       Three-body recombination rate for Li-7 for negative a
       -------------------------------------------------->
-      <div id="fig3slide" class="step slide" data-x="4800" data-y="800"
+      <div id="fig3slide" class="step slide" data-x="2400" data-y="1600"
         style="padding:90px 20px">
 
         <!--Load the script describing the figure-->
@@ -406,44 +434,13 @@
             </td>
           </tr>
         </table>
-        <div class="substep" id="decrease_temp1Li7"></div>
-      </div>
-      <!--------------------------------------------------
-      Efimov spectrum
-      -------------------------------------------------->
-      <div id="efimov_spectrum_slide" class="step slide"
-        data-x="4800" data-y="1600" style="padding:90px 20px">
-
-        <!--Load the script describing the figure-->
-        <script type="text/javascript"
-          src="figures/efimov_spectrum_animated.js">
-        </script>
-
-        <table class="fixed">
-          <tr>
-            <td style="width:15%;vertical-align:middle;
-              -webkit-transform: rotate(-90deg);
-              -moz-transform: rotate(-90deg);" >
-              \(-\left\vert E_T^{(n)}\dfrac{2ma_0^{2}}{\hbar^2}\right\vert^{1/8}\)
-            </td>
-            <td style="width:85%">
-              <h3> Efimov spectrum</h3>
-              <div id="animated_graph" style="width:800px;height:450px">
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td style="width:15%"></td>
-            <td style="width:85%;text-align:center">\(\textrm{sign}(a)\times\left\vert\dfrac{a_0^2}{a^2}\right\vert^{1/8}\)</td>
-          </tr>
-        </table>
-        <div class="substep" id="morf_efimov_graph"></div>
+        <div class="substep" id="show_temp"></div>
       </div>
       <!--------------------------------------------------
       Mass-imbalanced systems
       -------------------------------------------------->
       <div id="mass_imbalanced_slide" class="step slide"
-        data-x="3600" data-y="1600">
+        data-x="1200" data-y="1600">
         <!--[>Load the script describing the figure<]-->
         <script type="text/javascript" src="figures/mass_imbalanced.js">
         </script>
@@ -478,37 +475,10 @@
         </div>
       </div>
       <!--------------------------------------------------
-      Finite temperature effects
-      -------------------------------------------------->
-      <div id="finite_temperature" class="step slide"
-        data-x="2400" data-y="1600">
-        <h1>Finite temperature effects</h1>
-        <ul>
-          <!--Need id's to detect when the substep is entered-->
-          <li class="substep">
-            Experimental performed at fixed temperature, not
-            fixed energy.
-          </li>
-          <li class="substep" id="average_equation">
-            Perform thermal average
-            \[
-              \langle\alpha_\text{rec}(a)\rangle_T= \frac{1}{2(k_BT)^3}
-              \int E^2e^{-E/k_BT}\alpha_\text{rec}(a,E)\;dE
-            \]
-          </li>
-        </ul>
-        <div>
-          <img class="substep" src="images/tree.jpg"
-            style="height:250px;float:left;">
-          <img class="substep" src="images/bird.jpg"
-            style="height:250px;float:left;">
-        </div>
-      </div>
-      <!--------------------------------------------------
       Recombination for mass imbalanced systems incl. temperature effects
       -------------------------------------------------->
       <div id="mass_imbalanced_slide2" class="step slide"
-        data-x="2400" data-y="2400" style="padding:90px 20px">
+        data-x="1200" data-y="2400" style="padding:90px 20px">
 
         <!--Load the script describing the figure-->
         <script type="text/javascript"
