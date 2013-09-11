@@ -273,12 +273,18 @@
       <div id="bound_states_slide" class="step slide"
         data-x="3600" data-y="0">
         <h2>Bound states</h2>
+        <script src="figures/zero_range_bound_states.js"></script>
+        <div id="zero_range_bound_states"
+          style="width:600px;height:200px;"></div>
+        <div class="substep" id="show_dimer_negative"></div>
+        <div class="substep" id="show_trimer_positive"></div>
+        <div class="substep" id="show_trimer_negative"></div>
       </div>
       <!--------------------------------------------------
       Efimov spectrum
       -------------------------------------------------->
       <div id="efimov_spectrum_slide" class="step slide"
-        data-x="4800" data-y="0" style="padding:90px 20px">
+        data-x="4800" data-y="-800" style="padding:90px 20px">
 
         <!--Load the script describing the figure-->
         <script type="text/javascript"
@@ -296,14 +302,27 @@
               <h3> Efimov spectrum</h3>
               <div id="animated_graph" style="width:800px;height:450px">
               </div>
+              <p style="color:red">Add a_1^* and a_2^* markers to the
+              spectrum</p>
             </td>
           </tr>
           <tr>
             <td style="width:15%"></td>
-            <td style="width:85%;text-align:center">\(\textrm{sign}(a)\times\left\vert\dfrac{a_0^2}{a^2}\right\vert^{1/8}\)</td>
+            <td style="width:85%;text-align:center">
+              \(\textrm{sign}(a)\times\left\vert\dfrac{a_0^2}{a^2}\right\vert^{1/8}\)
+            </td>
           </tr>
         </table>
         <div class="substep" id="morf_efimov_graph"></div>
+      </div>
+      <!--------------------------------------------------
+      Efimov spectrum
+      -------------------------------------------------->
+      <div id="recombination_slide" class="step slide"
+        data-x="4800" data-y="0">
+        <h2>Three-body recombination</h2>
+        Three particles collide and form a dimer and a free particles that
+        escape from the trapping potential.
       </div>
       <!--------------------------------------------------
       Three-body recombination rate for Li-7 for positive a
@@ -345,8 +364,15 @@
       <!--------------------------------------------------
       Finite temperature effects
       -------------------------------------------------->
-      <div id="finite_temperature" class="step slide"
+      <div id="negative_scattering_length_slide" class="step slide"
         data-x="4800" data-y="1600">
+        <h2>Finite temperature effects</h2>
+      </div>
+      <!--------------------------------------------------
+      Finite temperature effects
+      -------------------------------------------------->
+      <div id="finite_temperature" class="step slide"
+        data-x="4800" data-y="2400">
         <h2>Finite temperature effects</h2>
         <h2 style="color:red">Remove this slide</h2>
         <ul>

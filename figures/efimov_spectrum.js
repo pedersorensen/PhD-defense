@@ -1,3 +1,4 @@
+$(document).ready(function(){
 var data1s = [
     [-5.553583927756133,4.562217628042581e-05],
     [-5.562828780027184,-5.293247961496537e-06],
@@ -1434,9 +1435,10 @@ var data3r = [
     [253.0269838758018,-1.657416110559897e-05]
     ];
 
-$(document).ready(function(){
-    R0=-5;
-    function R(a) {return R0*Math.pow(1-1/a,2);}
+    var R0 = -5;
+    function R(a) {
+        return R0*Math.pow(1-1/a,2);
+    }
     var threshold = data1s.slice(61).map(function(val){
         var a = val[0];
         var E = -1/Math.pow(R(a),2)*Math.pow(1-Math.sqrt(1-2*R(a)/a),2);

@@ -1,3 +1,4 @@
+$(document).ready(function() {
 var data1s = [
     [-5.553583927756133,4.562217628042581e-05],
     [-5.562828780027184,-5.293247961496537e-06],
@@ -1433,7 +1434,6 @@ var data3r = [
     [262.6575689353197,-1.552176842558955e-05],
     [253.0269838758018,-1.657416110559897e-05]
     ];
-$(document).ready(function() {
     //Create the canvas to draw on
     var paper = Raphael("animated_graph", 790, 460);
 

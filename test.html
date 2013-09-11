@@ -114,41 +114,24 @@
           <!--</tr>-->
         <!--</table>-->
       <!--</div>-->
+
       <!--------------------------------------------------
-      Zero-range models
+      Bound states
       -------------------------------------------------->
-      <div id="zero_range_models_slide" class="step slide"
-        data-x="2400" data-y="0">
-        <h2>Zero-range models</h2>
-        <script src="figures/zero_range_models.js"></script>
-        <div id="zero_range_placeholder" style="width:800px;height:450px;">
-        </div>
-
-        <!--Substeps that animate the wave-function-->
-        <div id="reduce_range1" class="substep"></div>
-        <div id="reduce_range2" class="substep"></div>
-        <div id="reduce_range3" class="substep"></div>
-        <div id="reduce_range4" class="substep"></div>
-        <div id="reduce_range5" class="substep"></div>
-        <div id="reduce_range6" class="substep"></div>
-        <div id="reduce_range7" class="substep"></div>
-        <!--Substep to show the equations incrementally-->
-        <p class="substep" style="position:absolute;left:200px;top:360px;">
-        \(\psi=cx+d\)
-        <span class="substep">\(=c\left(x+\dfrac{d}{c}\right)\)</span>
-        <span class="substep">\(\propto x-a\)</span>
-        </p>
-        <p class="substep" style="position:absolute;left:200px;top:460px;">
-        \(\dfrac{\psi'}{\psi\phantom{'}}\bigg\vert_{x\,=\,0}\)
-        <span class="substep">\(=-\dfrac{1}{a}\)</span>
-        <span class="substep">\(+\dfrac{1}{2}Rk^2\)</span>
-        </p>
+      <div id="bound_states_slide" class="step slide"
+        data-x="1200" data-y="0">
+        <h2>Bound states</h2>
+        <script src="figures/zero_range_bound_states.js"></script>
+        <div id="zero_range_bound_states"
+          style="width:600px;height:200px;"></div>
+        <div class="substep" id="show_dimer_negative"></div>
+        <div class="substep" id="show_trimer_positive"></div>
+        <div class="substep" id="show_trimer_negative"></div>
       </div>
-
       <!--------------------------------------------------
       Overview slide
       -------------------------------------------------->
-      <div id="overview2" class="step" data-x="600" data-y="0"
+      <div id="2overview" class="step" data-x="600" data-y="0"
         data-scale="4" style="width:10px;height:10px;">
       </div>
       <!--------------------------------------------------
