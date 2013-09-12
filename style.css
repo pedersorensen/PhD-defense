@@ -346,6 +346,21 @@ td{
 #hyper_coords_slide th{
     font-size:25pt;
 }
+/*************************
+ *  Recombination slide  *
+ *************************/
+.impress-enabled .substep {
+    opacity: 0.1;
+    -webkit-transition: all 0s;
+    -moz-transition:    all 0s;
+    -ms-transition:     all 0s;
+    -o-transition:      all 0s;
+    transition:         all 0s;
+}
+#recombination_slide .substep.past{
+    opacity:1;
+}
+
 
 /********************
  *  Optical model  *

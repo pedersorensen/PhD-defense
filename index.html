@@ -302,8 +302,6 @@
               <h3> Efimov spectrum</h3>
               <div id="animated_graph" style="width:800px;height:450px">
               </div>
-              <p style="color:red">Add a_1^* and a_2^* markers to the
-              spectrum</p>
             </td>
           </tr>
           <tr>
@@ -316,13 +314,27 @@
         <div class="substep" id="morf_efimov_graph"></div>
       </div>
       <!--------------------------------------------------
-      Efimov spectrum
+      Three-body recombination
       -------------------------------------------------->
       <div id="recombination_slide" class="step slide"
         data-x="4800" data-y="0">
         <h2>Three-body recombination</h2>
-        Three particles collide and form a dimer and a free particles that
-        escape from the trapping potential.
+        <table class="fixed">
+          <tr>
+            <td>
+              Three particles collide...
+            </td>
+            <td class="substep" id="draw_products">
+              ... and form a dimer and a free particle
+            </td>
+          </tr>
+        </table>
+        <script src="figures/three_body_recombination.js"></script>
+        <div id="recombination_placeholder"
+          style="width:800px;height:300px"></div>
+        <div class="substep">
+          The reaction products are too energetic to stay in the trap,
+          hence the leave and particles are lost</div>
       </div>
       <!--------------------------------------------------
       Three-body recombination rate for Li-7 for positive a

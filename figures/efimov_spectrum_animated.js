@@ -1434,6 +1434,7 @@ var data3r = [
     [262.6575689353197,-1.552176842558955e-05],
     [253.0269838758018,-1.657416110559897e-05]
     ];
+
     //Create the canvas to draw on
     var paper = Raphael("animated_graph", 790, 460);
 
@@ -1572,6 +1573,27 @@ var data3r = [
     var line3r = paper.path(path3s).attr(line_attr);
     var line_th_r = paper.path(path_th).attr(line_attr);
 
+    // Draw some markers on the graph
+    var point_attr={fill:"purple",stroke:"purple"}
+    paper.circle(610,230,7).attr(point_attr);
+    paper.circle(510,120,7).attr(point_attr);
+    var placeholder = $("#animated_graph");
+    placeholder.append(
+            "<div style='position:absolute;left:" +
+            700 + "px;top:" + 230+
+            "px;'>\\(a_2^*\\)</div>");
+    placeholder.append(
+            "<div style='position:absolute;left:" +
+            800 + "px;top:" + 330+
+            "px;'>\\(a_1^*\\)</div>");
+    placeholder.append(
+            "<div style='position:absolute;left:" +
+            330 + "px;top:" + 430+
+            "px;'>\\(a^{(-)}\\)</div>");
+    paper.path("M178,290l0,-60").attr({
+        "stroke-width":3,
+        "stroke":"purple", })
+
     $("#morf_efimov_graph").on("impress:substep-enter", function(){
         line1d.animate({path:path1d,opacity:1}, 1000);
         line1r.animate({path:path1r,opacity:1}, 1000);
@@ -1584,18 +1606,5 @@ var data3r = [
         legend3.animate({y:transY(-0.21),opacity:1},1000)
         legend_rect2.animate({y:transY(-0.125), opacity:1},1000)
         legend_rect3.animate({y:transY(-0.195), opacity:1},1000)
-    });
-    $("#morf_efimov_graph").on("impress:substep-exit", function(){
-        line1d.animate({path:path1s,opacity:0}, 1000);
-        line1r.animate({path:path1s,opacity:0}, 1000);
-        line2d.animate({path:path2s,opacity:0}, 1000);
-        line2r.animate({path:path2s,opacity:0}, 1000);
-        line3d.animate({path:path3s,opacity:0}, 1000);
-        line3r.animate({path:path3s,opacity:0}, 1000);
-        line_th_r.animate({path:path_th,opacity:0}, 1000);
-        legend2.animate({y:transY(-0.07),opacity:0},1000)
-        legend3.animate({y:transY(-0.07),opacity:0},1000)
-        legend_rect2.animate({y:transY(-0.055), opacity:0},1000)
-        legend_rect3.animate({y:transY(-0.055), opacity:0},1000)
     });
 });

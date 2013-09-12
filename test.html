@@ -67,71 +67,34 @@
         </table>
       </div>
       <!--------------------------------------------------
-      Introduction
+      Three-body recombination
       -------------------------------------------------->
-      <!--<div id="intro_slide" class="step slide" data-x="1200" data-y="0">-->
-        <!--<h2>Introduction</h2>-->
-        <!--<table>-->
-          <!--<tr>-->
-            <!--<td align="center">-->
-              <!--<table>-->
-                <!--<tr class="substep">-->
-                  <!--<td>-->
-                    <!--<p class="th">The problem:</p>-->
-                    <!--<ul>-->
-                      <!--<li> System of cold atoms in a trap </li>-->
-                      <!--<li> Interactions lead to losses </li>-->
-                    <!--</ul>-->
-                    <!--<br>-->
-                  <!--</td>-->
-                <!--</tr>-->
-                <!--<tr class="substep">-->
-                  <!--<td>-->
-                    <!--<p class="th">The question:</p>-->
-                    <!--<ul>-->
-                      <!--<li> How to describe the interactions?</li>-->
-                      <!--<li> How to utilise the loss spectrum?</li>-->
-                    <!--</ul>-->
-                    <!--<br>-->
-                  <!--</td>-->
-                <!--</tr>-->
-                <!--<tr class="substep">-->
-                  <!--<td>-->
-                    <!--<p class="th">The fun part:</p>-->
-                    <!--<ul>-->
-                      <!--<li>Three-body physics</li>-->
-                      <!--<li>Efimov physics</li>-->
-                    <!--</ul>-->
-                  <!--</td>-->
-                <!--</tr>-->
-              <!--</table>-->
-            <!--</td>-->
-            <!--<td style="width:30%" class="substep">-->
-              <!--<p class="th">The guy:</p>-->
-                <!--<div align="center"> Vitaly Efimov </div>-->
-              <!--<img id="vitaly" src="images/vitaly_efimov.jpg">-->
-            <!--</td>-->
-          <!--</tr>-->
-        <!--</table>-->
-      <!--</div>-->
-
-      <!--------------------------------------------------
-      Bound states
-      -------------------------------------------------->
-      <div id="bound_states_slide" class="step slide"
-        data-x="1200" data-y="0">
-        <h2>Bound states</h2>
-        <script src="figures/zero_range_bound_states.js"></script>
-        <div id="zero_range_bound_states"
-          style="width:600px;height:200px;"></div>
-        <div class="substep" id="show_dimer_negative"></div>
-        <div class="substep" id="show_trimer_positive"></div>
-        <div class="substep" id="show_trimer_negative"></div>
+      <div id="recombination_slide" class="step slide"
+        data-x="4800" data-y="0">
+        <h2>Three-body recombination</h2>
+        <!--Three particles collide and form a dimer and a free particles that-->
+        <!--escape from the trapping potential.-->
+        <table class="fixed">
+          <tr>
+            <td>
+              Three particles collide...
+            </td>
+            <td class="substep" id="draw_products">
+              ... and form a dimer and a free particle
+            </td>
+          </tr>
+        </table>
+        <script src="figures/three_body_recombination.js"></script>
+        <div id="recombination_placeholder"
+          style="width:800px;height:300px"></div>
+        <div class="substep">
+          The reaction products are too energetic to stay in the trap,
+          hence the leave and particles are lost</div>
       </div>
       <!--------------------------------------------------
       Overview slide
       -------------------------------------------------->
-      <div id="2overview" class="step" data-x="600" data-y="0"
+      <div id="overview" class="step" data-x="600" data-y="0"
         data-scale="4" style="width:10px;height:10px;">
       </div>
       <!--------------------------------------------------
