@@ -133,7 +133,7 @@
                     <p class="th">The question:</p>
                     <ul>
                       <li> How to describe the interactions?</li>
-                      <li> How to utilise the loss spectrum?</li>
+                      <!--<li> How to utilise the loss spectrum?</li>-->
                     </ul>
                     <br>
                   </td>
@@ -284,7 +284,7 @@
       Efimov spectrum
       -------------------------------------------------->
       <div id="efimov_spectrum_slide" class="step slide"
-        data-x="4800" data-y="-800" style="padding:90px 20px">
+        data-x="4800" data-y="0" style="padding:90px 20px">
 
         <!--Load the script describing the figure-->
         <script type="text/javascript"
@@ -314,10 +314,44 @@
         <div class="substep" id="morf_efimov_graph"></div>
       </div>
       <!--------------------------------------------------
+      Three-body parameter
+      -------------------------------------------------->
+      <div id="three_body_parameter_slide" class="step slide"
+        data-x="4800" data-y="800" style="padding:90px 20px">
+
+        <!--Load the script describing the figure-->
+        <script type="text/javascript"
+          src="figures/three_body_parameter.js"> </script>
+
+        <!--Arranging items is best done via tables-->
+        <table class="fixed">
+          <tr>
+            <td style="width:10%;vertical-align:middle;
+              -webkit-transform: rotate(-90deg);
+              -moz-transform: rotate(-90deg);">
+              <!--\(\alpha_\text{rec}[\text{cm}^6/\text{s}]\)-->
+              r<sub>vdW</sub>&nbsp;/a<sup>(-)</sup>
+            </td>
+            <td style="width:90%">
+              <h3>Three-body parameter</h3>
+              <div id="3BP_placeholder" style="width:800px;height:450px">
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="width:10%"></td>
+            <!--<td style="width:90%;text-align:center">\(a[a_0]\)</td>-->
+            <td style="width:90%;text-align:center">
+              log<sub>10</sub>(s<sub>res</sub>)
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!--------------------------------------------------
       Three-body recombination
       -------------------------------------------------->
       <div id="recombination_slide" class="step slide"
-        data-x="4800" data-y="0">
+        data-x="4800" data-y="1600">
         <h2>Three-body recombination</h2>
         <table class="fixed">
           <tr>
@@ -333,13 +367,16 @@
         <div id="recombination_placeholder"
           style="width:800px;height:300px"></div>
         <div class="substep">
-          The reaction products are too energetic to stay in the trap,
-          hence the leave and particles are lost</div>
+          All particles are lost at a rate given by
+        </div>
+        <div class="substep" align="center">
+        \(\dot n = -\alpha_\text{rec}n^3\)
+        </div>
       </div>
       <!--------------------------------------------------
       Three-body recombination rate for Li-7 for positive a
       -------------------------------------------------->
-      <div id="fig2slide" class="step slide" data-x="4800" data-y="800"
+      <div id="fig2slide" class="step slide" data-x="3600" data-y="1600"
         style="padding:90px 20px">
 
         <!--Load the script describing the figure-->
@@ -376,42 +413,34 @@
       <!--------------------------------------------------
       Finite temperature effects
       -------------------------------------------------->
-      <div id="negative_scattering_length_slide" class="step slide"
-        data-x="4800" data-y="1600">
-        <h2>Finite temperature effects</h2>
-      </div>
-      <!--------------------------------------------------
-      Finite temperature effects
-      -------------------------------------------------->
-      <div id="finite_temperature" class="step slide"
-        data-x="4800" data-y="2400">
-        <h2>Finite temperature effects</h2>
-        <h2 style="color:red">Remove this slide</h2>
-        <ul>
-          <li class="substep">
-            Experimental performed at fixed temperature, not
-            fixed energy.
-          </li>
-          <li class="substep" id="average_equation">
-            Perform thermal average
-            \[
-              \langle\alpha_\text{rec}(a)\rangle_T= \frac{1}{2(k_BT)^3}
-              \int E^2e^{-E/k_BT}\alpha_\text{rec}(a,E)\;dE
-            \]
-          </li>
-        </ul>
-        <div>
-          <img class="substep" src="images/tree.jpg"
-            style="height:250px;float:left;">
-          <img class="substep" src="images/bird.jpg"
-            style="height:250px;float:left;">
-        </div>
-      </div>
+      <!--<div id="finite_temperature" class="step slide"-->
+        <!--data-x="2400" data-y="1600">-->
+        <!--<h2>Finite temperature effects</h2>-->
+        <!--<ul>-->
+          <!--<li class="substep">-->
+            <!--Experimental performed at fixed temperature, not-->
+            <!--fixed energy.-->
+          <!--</li>-->
+          <!--<li class="substep" id="average_equation">-->
+            <!--Perform thermal average-->
+            <!--\[-->
+              <!--\langle\alpha_\text{rec}(a)\rangle_T= \frac{1}{2(k_BT)^3}-->
+              <!--\int E^2e^{-E/k_BT}\alpha_\text{rec}(a,E)\;dE-->
+            <!--\]-->
+          <!--</li>-->
+        <!--</ul>-->
+        <!--<div>-->
+          <!--<img class="substep" src="images/tree.jpg"-->
+            <!--style="height:250px;float:left;">-->
+          <!--<img class="substep" src="images/bird.jpg"-->
+            <!--style="height:250px;float:left;">-->
+        <!--</div>-->
+      <!--</div>-->
       <!--------------------------------------------------
       Optical potential model
       -------------------------------------------------->
       <div id="optical_model_slide" class="step slide"
-        data-x="3600" data-y="1600" style="padding:70px 20px">
+        data-x="2400" data-y="1600" style="padding:70px 20px">
 
         <!--Load the script describing the figure-->
         <script type="text/javascript" src="figures/optical_model.js">
@@ -439,7 +468,7 @@
       <!--------------------------------------------------
       Three-body recombination rate for Li-7 for negative a
       -------------------------------------------------->
-      <div id="fig3slide" class="step slide" data-x="2400" data-y="1600"
+      <div id="fig3slide" class="step slide" data-x="1200" data-y="1600"
         style="padding:90px 20px">
 
         <!--Load the script describing the figure-->
@@ -478,7 +507,7 @@
       Mass-imbalanced systems
       -------------------------------------------------->
       <div id="mass_imbalanced_slide" class="step slide"
-        data-x="1200" data-y="1600">
+        data-x="0" data-y="1600">
         <!--[>Load the script describing the figure<]-->
         <script type="text/javascript" src="figures/mass_imbalanced.js">
         </script>
@@ -516,7 +545,7 @@
       Recombination for mass imbalanced systems incl. temperature effects
       -------------------------------------------------->
       <div id="mass_imbalanced_slide2" class="step slide"
-        data-x="1200" data-y="2400" style="padding:90px 20px">
+        data-x="0" data-y="800" style="padding:90px 20px">
 
         <!--Load the script describing the figure-->
         <script type="text/javascript"

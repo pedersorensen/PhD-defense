@@ -67,30 +67,95 @@
         </table>
       </div>
       <!--------------------------------------------------
-      Three-body recombination
+      Efimov spectrum
       -------------------------------------------------->
-      <div id="recombination_slide" class="step slide"
-        data-x="4800" data-y="0">
-        <h2>Three-body recombination</h2>
-        <!--Three particles collide and form a dimer and a free particles that-->
-        <!--escape from the trapping potential.-->
+      <div id="efimov_spectrum_slide" class="step slide"
+        data-x="4800" data-y="-800" style="padding:90px 20px">
+
+        <!--Load the script describing the figure-->
+        <script type="text/javascript"
+          src="figures/efimov_spectrum_animated.js">
+        </script>
+
         <table class="fixed">
           <tr>
-            <td>
-              Three particles collide...
+            <td style="width:15%;vertical-align:middle;
+              -webkit-transform: rotate(-90deg);
+              -moz-transform: rotate(-90deg);" >
+              \(-\left\vert E_T^{(n)}\dfrac{2ma_0^{2}}{\hbar^2}\right\vert^{1/8}\)
             </td>
-            <td class="substep" id="draw_products">
-              ... and form a dimer and a free particle
+            <td style="width:85%">
+              <h3> Efimov spectrum</h3>
+              <div id="animated_graph" style="width:800px;height:450px">
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="width:15%"></td>
+            <td style="width:85%;text-align:center">
+              \(\textrm{sign}(a)\times\left\vert\dfrac{a_0^2}{a^2}\right\vert^{1/8}\)
             </td>
           </tr>
         </table>
-        <script src="figures/three_body_recombination.js"></script>
-        <div id="recombination_placeholder"
-          style="width:800px;height:300px"></div>
-        <div class="substep">
-          The reaction products are too energetic to stay in the trap,
-          hence the leave and particles are lost</div>
+        <div class="substep" id="morf_efimov_graph"></div>
       </div>
+      <!--------------------------------------------------
+      Three-body parameter
+      -------------------------------------------------->
+      <div id="three_body_parameter_slide" class="step slide"
+        data-x="6000" data-y="-800" style="padding:90px 20px">
+
+        <!--Load the script describing the figure-->
+        <script type="text/javascript"
+          src="figures/three_body_parameter.js"> </script>
+
+        <!--Arranging items is best done via tables-->
+        <table class="fixed">
+          <tr>
+            <td style="width:10%;vertical-align:middle;
+              -webkit-transform: rotate(-90deg);
+              -moz-transform: rotate(-90deg);">
+              <!--\(\alpha_\text{rec}[\text{cm}^6/\text{s}]\)-->
+              r<sub>vdW</sub>&nbsp;/a<sup>(-)</sup>
+            </td>
+            <td style="width:90%">
+              <h3>Three-body parameter</h3>
+              <div id="3BP_placeholder" style="width:800px;height:450px">
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="width:10%"></td>
+            <!--<td style="width:90%;text-align:center">\(a[a_0]\)</td>-->
+            <td style="width:90%;text-align:center">
+              log<sub>10</sub>(s<sub>res</sub>)
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!--------------------------------------------------
+      Three-body recombination
+      -------------------------------------------------->
+      <!--<div id="recombination_slide" class="step slide"-->
+        <!--data-x="4800" data-y="0">-->
+        <!--<h2>Three-body recombination</h2>-->
+        <!--<table class="fixed">-->
+          <!--<tr>-->
+            <!--<td>-->
+              <!--Three particles collide...-->
+            <!--</td>-->
+            <!--<td class="substep" id="draw_products">-->
+              <!--... and form a dimer and a free particle-->
+            <!--</td>-->
+          <!--</tr>-->
+        <!--</table>-->
+        <!--<script src="figures/three_body_recombination.js"></script>-->
+        <!--<div id="recombination_placeholder"-->
+          <!--style="width:800px;height:300px"></div>-->
+        <!--<div class="substep">-->
+          <!--The reaction products are too energetic to stay in the trap,-->
+          <!--hence the leave and particles are lost</div>-->
+      <!--</div>-->
       <!--------------------------------------------------
       Overview slide
       -------------------------------------------------->
