@@ -79,13 +79,13 @@ $(document).ready(function(){
         },
         {
             // Draw the wave-function
-            color:0,
+            color:4,
             data:psi_i[0],
             lines:{show:true},
         },
         {
             // Draw the potential
-            color:0,
+            color:"red",
             data:V(rV[0]),
         },
         {

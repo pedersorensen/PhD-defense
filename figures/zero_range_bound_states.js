@@ -37,6 +37,7 @@ $(document).ready(function(){
     paper.circle(x1,y1,radius).attr(circle_attr);
     paper.circle(x2,y2,radius).attr(circle_attr);
     putText(x1+42,y1+3,"a > 0");
+    putText(x1+12,y1+90,"E<sub>b</sub> ~ -1/a<sup>2</sup>");
 
     function dimer_negative(){
         x1 = 100;
@@ -46,6 +47,7 @@ $(document).ready(function(){
         paper.circle(x1,y1,radius).attr(circle_attr);
         paper.circle(x2,y2,radius).attr(circle_attr);
         putText(x1+42,y1+3,"a < 0");
+        putText(x1+12,y1+90,"E<sub>b</sub> ~ -1/R<sub>e</sub><sup>2</sup>");
     }
 
     function trimer_positive(){
