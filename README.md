@@ -2,7 +2,7 @@ PhD-defense slides
 ------------------
 These files constitute the presentation for my PhD-defense. Feel free to look at it and get inspiration (or laugh at my first puny attempt at making a presentation with JavaScript, HTML and CSS).
 
-To view the presentation [click here](http://peder86.github.io/PhD-defense/).
+To view the presentation [click here](http://pedersorensen.github.io/PhD-defense/).
 
 Libraries
 ---------
